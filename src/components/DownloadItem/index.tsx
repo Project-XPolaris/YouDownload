@@ -16,7 +16,6 @@ export interface DownloadItemPropsType {
 
 const DownloadItem = ({ status, name, size, progress, onStart, onPause,speed,remain }: DownloadItemPropsType) => {
   const displayProgress = Math.round(progress * 100);
-  console.log(progress)
   const classes = useStyles();
   return (
     <Paper className={classes.root}>

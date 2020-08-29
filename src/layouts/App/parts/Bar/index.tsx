@@ -1,8 +1,10 @@
 import React from 'react';
 import useStyles from './style';
-import { Toolbar, Typography, AppBar as ApplicationBar, IconButton } from '@material-ui/core';
-import { Link } from '@material-ui/icons';
+import { AppBar as ApplicationBar, Divider, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { ArrowBack, ArrowLeft, Close, Fullscreen, Link, Minimize, Refresh } from '@material-ui/icons';
 import useDialogsModel, { DialogKeys } from '../../../../models/dialogs';
+import { useHistory } from 'react-router-dom';
+import { app, remote } from '../../../../remote';
 
 export interface AppBarPropsType {
 
@@ -11,6 +13,28 @@ export interface AppBarPropsType {
 const AppBar = ({}: AppBarPropsType) => {
   const classes = useStyles();
   const dialogsModel = useDialogsModel();
+  let history = useHistory();
+  const onClose = () => {
+    app.exit();
+  };
+  const onMin = () => {
+    remote.BrowserWindow.getFocusedWindow().minimize();
+  };
+  const onMax = () => {
+    const currentWindow = remote.BrowserWindow.getFocusedWindow();
+    if (currentWindow.isMaximized()) {
+      currentWindow.unmaximize();
+    } else {
+      currentWindow.maximize();
+    }
+
+  };
+  const onReload = () => {
+    remote.BrowserWindow.getFocusedWindow().reload();
+  };
+  const onBack = () => {
+    history.goBack();
+  };
   return (
     <ApplicationBar position="static" elevation={0} className={classes.root}>
       <Toolbar variant="dense">
@@ -22,6 +46,42 @@ const AppBar = ({}: AppBarPropsType) => {
           onClick={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, true)}
         >
           <Link />
+        </IconButton>
+        <Divider orientation={'vertical'} className={classes.divider} />
+        <IconButton
+          size={'small'}
+          className={classes.actionIcon}
+          onClick={onBack}
+        >
+          <ArrowBack />
+        </IconButton>
+        <IconButton
+          size={'small'}
+          className={classes.actionIcon}
+          onClick={onReload}
+        >
+          <Refresh />
+        </IconButton>
+        <IconButton
+          size={'small'}
+          className={classes.actionIcon}
+          onClick={onMin}
+        >
+          <Minimize />
+        </IconButton>
+        <IconButton
+          size={'small'}
+          className={classes.actionIcon}
+          onClick={onMax}
+        >
+          <Fullscreen />
+        </IconButton>
+        <IconButton
+          size={'small'}
+          className={classes.actionIcon}
+          onClick={onClose}
+        >
+          <Close />
         </IconButton>
       </Toolbar>
     </ApplicationBar>
