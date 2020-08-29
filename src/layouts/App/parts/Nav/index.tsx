@@ -13,6 +13,7 @@ import {
 } from '@material-ui/icons';
 import useTorrentModel from '../../../../models/torrents';
 import useLayoutModel from '../../../../models/layout';
+import logo from "../../../../assets/icon.png"
 
 export interface AppNavigationPropsType {
 
@@ -52,6 +53,7 @@ const AppNavigation = ({}: AppNavigationPropsType) => {
   }
   return (
     <div className={classes.root}>
+      <img src={logo} className={classes.logo}/>
       {
         torrentNavs.map(it => (
           <IconButton

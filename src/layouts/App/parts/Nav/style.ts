@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     navButtonActive:{
       color: theme.palette.primary.light
+    },
+    logo:{
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+      marginBottom:theme.spacing(2),
+      "-webkit-app-region":"drag"
     }
   }),
 );
