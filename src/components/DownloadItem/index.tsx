@@ -26,10 +26,10 @@ const DownloadItem = ({ status, name, size, progress, onStart, onPause,speed,rem
             <Folder />
           </Avatar>
           <div className={classes.meta}>
-            <div className={classes.name}>
+            <div className={classes.nameInfo}>
               {name}
             </div>
-            <div className={classes.size}>
+            <div className={classes.sizeInfo}>
               {size}
             </div>
           </div>

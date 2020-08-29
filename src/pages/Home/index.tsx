@@ -1,14 +1,4 @@
-import React, { useEffect } from 'react';
-import {
-  Avatar,
-  IconButton, LinearProgress,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-} from '@material-ui/core';
-import { BeachAccess, Link, Pause, PlayArrow, Work } from '@material-ui/icons';
+import React from 'react';
 import useStyles from './style';
 import useTorrentModel from '../../models/torrents';
 import { useRequest } from 'ahooks';

@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor:theme.palette.primary.main,
       color:theme.palette.primary.contrastText
     },
-    name:{
-      ...theme.typography.h6,
+    nameInfo:{
+      fontSize:14
     },
-    size:{
-      fontsize:8
+    sizeInfo:{
+      fontsize:6
     },
     info:{
       marginTop:theme.spacing(2),
