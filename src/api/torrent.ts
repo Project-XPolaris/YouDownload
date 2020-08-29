@@ -2,7 +2,7 @@ import apiRequest from './request';
 import { TorrentEntity } from './entites/TorrentEntity';
 
 export const getAllTorrent = async (): Promise<TorrentEntity[]> => {
-  return await apiRequest.get('/torrent/getAllEngineTorrents');
+  return await apiRequest.get('/torrent/getAllTorrents');
 };
 
 export const startDownload = async (hexString: string) => {

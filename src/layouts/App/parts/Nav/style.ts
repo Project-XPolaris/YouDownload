@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     navButton:{
       color:theme.palette.common.white
+    },
+    navButtonActive:{
+      color: theme.palette.primary.light
     }
   }),
 );
