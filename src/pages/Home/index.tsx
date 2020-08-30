@@ -6,6 +6,7 @@ import { addMargaretLink, startDownload, stopDownload } from '../../api/torrent'
 import AddMargaretLinkDialog from '../../components/AddMargaretLinkDialog';
 import useDialogsModel, { DialogKeys } from '../../models/dialogs';
 import DownloadItem from '../../components/DownloadItem';
+import { LinkOff } from '@material-ui/icons';
 
 export interface HomePagePropsType {
 
@@ -30,6 +31,11 @@ const HomePage = ({}: HomePagePropsType) => {
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, false)}
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddMargaretDialogKey])}
       />
+      {torrentModel.torrents.length === 0 &&
+        <div className={classes.empty}>
+          <LinkOff className={classes.emptyIcon}/>
+        </div>
+      }
       {
         torrentModel.torrents.map((torrent, idx) => (
           <div className={classes.item} key={idx}>

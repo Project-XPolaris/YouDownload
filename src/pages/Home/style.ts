@@ -12,6 +12,17 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom:theme.spacing(2),
       boxSizing:"border-box"
     },
+    empty:{
+      height: "100%",
+      textAlign:"center",
+      display:"flex",
+      justifyContent:"center",
+      alignItems:"center"
+    },
+    emptyIcon:{
+      color:theme.palette.grey['500'],
+      fontSize:theme.spacing(10)
+    },
     item:{
       marginBottom:theme.spacing(1)
     }
