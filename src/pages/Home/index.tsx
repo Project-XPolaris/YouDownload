@@ -2,7 +2,7 @@ import React from 'react';
 import useStyles from './style';
 import useTorrentModel from '../../models/torrents';
 import { useRequest } from 'ahooks';
-import { addMargaretLink, addTorrentFile, startDownload, stopDownload } from '../../api/torrent';
+import { addMargaretLink, addTorrentFile, startDownload, stopDownload, deleteTorrent } from '../../api/torrent';
 import AddMargaretLinkDialog from '../../components/AddMargaretLinkDialog';
 import useDialogsModel, { DialogKeys } from '../../models/dialogs';
 import DownloadItem from '../../components/DownloadItem';
@@ -57,6 +57,15 @@ const HomePage = ({}: HomePagePropsType) => {
               onPause={() => stopDownload(torrent.HexString)}
               speed={torrent.DownloadSpeed}
               remain={torrent.LeftTime}
+              onDelete={() => {
+                dialogsModel.showConfirmDialog({
+                  title:"移除任务",
+                  content:"将永久性的删除任务",
+                  onOk:() => {
+                    deleteTorrent(torrent.HexString)
+                  }
+                })
+              }}
             />
           </div>
         ))

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, IconButton, LinearProgress, Paper } from '@material-ui/core';
-import { Folder, Pause, PlayArrow, Speed, Timer } from '@material-ui/icons';
+import { Folder, Pause, PlayArrow, Speed, Timer, Delete } from '@material-ui/icons';
 import useStyles from './style';
 
 export interface DownloadItemPropsType {
@@ -10,11 +10,12 @@ export interface DownloadItemPropsType {
   progress: number
   onStart: () => void
   onPause: () => void
-  speed:string
-  remain:string
+  speed: string
+  remain: string
+  onDelete: () => void
 }
 
-const DownloadItem = ({ status, name, size, progress, onStart, onPause,speed,remain }: DownloadItemPropsType) => {
+const DownloadItem = ({ status, name, size, progress, onStart, onPause, speed, remain, onDelete }: DownloadItemPropsType) => {
   const displayProgress = Math.round(progress * 100);
   const classes = useStyles();
   return (
@@ -42,13 +43,18 @@ const DownloadItem = ({ status, name, size, progress, onStart, onPause,speed,rem
                 <PlayArrow />
               </IconButton>
             ) : (
-              <IconButton
-                onClick={onPause}
-              >
-                <Pause />
-              </IconButton>
-            )
+                <IconButton
+                  onClick={onPause}
+                >
+                  <Pause />
+                </IconButton>
+              )
           }
+          <IconButton
+            onClick={onDelete}
+          >
+            <Delete />
+          </IconButton>
         </div>
       </div>
       <div className={classes.info}>

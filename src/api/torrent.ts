@@ -36,3 +36,11 @@ export const addTorrentFile = async (torrentFile:File) => {
     data: requestForm,
   });
 }
+
+export const deleteTorrent = async(hexString:string) => {
+  const requestForm = new FormData();
+  requestForm.append('hexString', hexString);
+  return await apiRequest.post('/torrent/delOne', {
+    data: requestForm,
+  });
+}
