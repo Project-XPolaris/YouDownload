@@ -2,11 +2,12 @@ import React from 'react';
 import useStyles from './style';
 import useTorrentModel from '../../models/torrents';
 import { useRequest } from 'ahooks';
-import { addMargaretLink, startDownload, stopDownload } from '../../api/torrent';
+import { addMargaretLink, addTorrentFile, startDownload, stopDownload } from '../../api/torrent';
 import AddMargaretLinkDialog from '../../components/AddMargaretLinkDialog';
 import useDialogsModel, { DialogKeys } from '../../models/dialogs';
 import DownloadItem from '../../components/DownloadItem';
 import { LinkOff } from '@material-ui/icons';
+import AddTorrentFileDialog from '../../components/AddTorrentFileDialog';
 
 export interface HomePagePropsType {
 
@@ -31,10 +32,18 @@ const HomePage = ({}: HomePagePropsType) => {
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, false)}
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddMargaretDialogKey])}
       />
+      <AddTorrentFileDialog
+        onOk={(file) => {
+          addTorrentFile(file)
+          dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, false);
+        }}
+        onCancel={() => dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, false)}
+        open={Boolean(dialogsModel.activeDialog[DialogKeys.AddTorrentFileDialogKey])}
+      />
       {torrentModel.torrents.length === 0 &&
-        <div className={classes.empty}>
-          <LinkOff className={classes.emptyIcon}/>
-        </div>
+      <div className={classes.empty}>
+        <LinkOff className={classes.emptyIcon} />
+      </div>
       }
       {
         torrentModel.torrents.map((torrent, idx) => (

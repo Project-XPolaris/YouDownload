@@ -36,9 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
       color:theme.palette.primary.contrastText
     },
     nameInfo:{
+      ...theme.typography.body1,
       fontSize:14
     },
     sizeInfo:{
+      ...theme.typography.body1,
       fontsize:6
     },
     info:{
@@ -49,12 +51,15 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1)
     },
     remainInfo:{
+      ...theme.typography.body1,
       width:theme.spacing(40),
       display:"flex",
       alignItems:"center",
       overflow:"hidden"
     },
     speedInfo:{
+      ...theme.typography.body1,
+      marginLeft: theme.spacing(2),
       width:theme.spacing(40),
       display:"flex",
       alignItems:"center"

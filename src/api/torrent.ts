@@ -28,3 +28,11 @@ export const addMargaretLink = async (linkAddress: string) => {
     data: requestForm,
   });
 };
+
+export const addTorrentFile = async (torrentFile:File) => {
+  const requestForm = new FormData()
+  requestForm.append("oneTorrentFile",torrentFile)
+  return await apiRequest.post('/torrent/addOneFile', {
+    data: requestForm,
+  });
+}

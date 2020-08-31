@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 export const DialogKeys = {
   AddMargaretDialogKey: 'add/margaret',
+  AddTorrentFileDialogKey: 'add/torrentFile',
 };
 const DialogsModel = () => {
   const [activeDialog, setActiveDialog] = useState<{ [key: string]: boolean }>({});

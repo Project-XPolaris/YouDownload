@@ -1,7 +1,7 @@
 import React from 'react';
 import useStyles from './style';
 import { AppBar as ApplicationBar, Divider, IconButton, Toolbar, Typography } from '@material-ui/core';
-import { ArrowBack, ArrowLeft, Close, Fullscreen, Link, Minimize, Refresh } from '@material-ui/icons';
+import { ArrowBack, ArrowLeft, Close, Description, Fullscreen, Link, Minimize, Refresh } from '@material-ui/icons';
 import useDialogsModel, { DialogKeys } from '../../../../models/dialogs';
 import { useHistory } from 'react-router-dom';
 import { app, remote } from '../../../../remote';
@@ -41,6 +41,12 @@ const AppBar = ({}: AppBarPropsType) => {
         <Typography variant="h6" color="inherit" className={classes.title}>
           下载
         </Typography>
+        <IconButton
+          className={classes.actionIcon}
+          onClick={() => dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, true)}
+        >
+         <Description />
+        </IconButton>
         <IconButton
           className={classes.actionIcon}
           onClick={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, true)}
