@@ -25,7 +25,9 @@ const HomeSubPanel = ({ }: HomeSubPanelPropsTypes) => {
                         onPause={() => {
                             stopDownload(torrent.HexString)
                         }}
+                        size={torrent.TotalLength}
                         status={torrent.Status}
+                        speed={torrent.DownloadSpeed}
                         onDelete={() => {
                             dialogsModel.showConfirmDialog({
                                 title: "删除确认",

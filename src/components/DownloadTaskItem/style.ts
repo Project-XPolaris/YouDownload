@@ -44,6 +44,20 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     actions:{
       paddingTop:0
+    },
+    infos:{
+      display:"flex"
+    },
+    infoWrap:{
+      display:"flex",
+      marginRight:theme.spacing(2),
+      alignItems:"center"
+    },
+    infoLabel:{
+      ...theme.typography.caption
+    },
+    infoIcon:{
+      marginRight:theme.spacing(1)
     }
   }),
 );
