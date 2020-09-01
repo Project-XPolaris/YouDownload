@@ -45,31 +45,7 @@ const HomePage = ({}: HomePagePropsType) => {
         <LinkOff className={classes.emptyIcon} />
       </div>
       }
-      {
-        torrentModel.torrents.map((torrent, idx) => (
-          <div className={classes.item} key={idx}>
-            <DownloadItem
-              status={torrent.Status}
-              name={torrent.TorrentName}
-              size={torrent.TotalLength}
-              progress={torrent.Percentage}
-              onStart={() => startDownload(torrent.HexString)}
-              onPause={() => stopDownload(torrent.HexString)}
-              speed={torrent.DownloadSpeed}
-              remain={torrent.LeftTime}
-              onDelete={() => {
-                dialogsModel.showConfirmDialog({
-                  title:"移除任务",
-                  content:"将永久性的删除任务",
-                  onOk:() => {
-                    deleteTorrent(torrent.HexString)
-                  }
-                })
-              }}
-            />
-          </div>
-        ))
-      }
+     
     </div>
   );
 };

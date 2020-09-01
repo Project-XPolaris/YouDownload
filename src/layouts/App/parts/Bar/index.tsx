@@ -10,7 +10,7 @@ export interface AppBarPropsType {
 
 }
 
-const AppBar = ({}: AppBarPropsType) => {
+const AppBar = ({ }: AppBarPropsType) => {
   const classes = useStyles();
   const dialogsModel = useDialogsModel();
   let history = useHistory();
@@ -41,11 +41,12 @@ const AppBar = ({}: AppBarPropsType) => {
         <Typography variant="h6" color="inherit" className={classes.title}>
           下载
         </Typography>
+
         <IconButton
           className={classes.actionIcon}
           onClick={() => dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, true)}
         >
-         <Description />
+          <Description />
         </IconButton>
         <IconButton
           className={classes.actionIcon}
@@ -89,6 +90,8 @@ const AppBar = ({}: AppBarPropsType) => {
         >
           <Close />
         </IconButton>
+
+
       </Toolbar>
     </ApplicationBar>
   );

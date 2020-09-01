@@ -3,6 +3,7 @@ import AppRouter from '../Router';
 import AppNavigation from './parts/Nav';
 import useStyles from './style';
 import AppBar from './parts/Bar';
+import SubPanel from './parts/Sub';
 
 export interface AppLayoutPropsType {
 
@@ -13,8 +14,9 @@ const AppLayout = ({}: AppLayoutPropsType) => {
   return (
     <div className={classes.root}>
       <AppNavigation />
+      <AppBar />
       <div className={classes.main}>
-        <AppBar />
+      
         <AppRouter />
       </div>
     </div>
