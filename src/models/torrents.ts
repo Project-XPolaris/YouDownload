@@ -7,6 +7,7 @@ function useTorrentModel() {
   const [torrents,setTorrents] = useState<TorrentEntity[]>([])
   const [sortKey,setSortKey] = useState<string>("name")
   const [statusFilter,setStatusFilter] = useState<string | undefined>("Running")
+  const [displayTorrent,setDisplayTorrent] = useState<TorrentEntity | undefined>(undefined)
   const loadAllTask = async () => {
     let result = await getAllTorrent()
     result = result.sort((a:TorrentEntity,b:TorrentEntity) => a.TorrentName.localeCompare(b.TorrentName))
@@ -20,11 +21,20 @@ function useTorrentModel() {
       result = result.filter(it => it.Status === "Stopped")
     }
     setTorrents(result)
+    if (displayTorrent){
+      const target : TorrentEntity | undefined = result.find(it => it.HexString === displayTorrent.HexString)
+      if (target){
+        setDisplayTorrent(target)
+      }
+    }
   }
+
   return {
    torrents,
     loadAllTask,
-    setStatusFilter
+    setStatusFilter,
+    setDisplayTorrent,
+    displayTorrent
   };
 }
 

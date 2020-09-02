@@ -25,6 +25,7 @@ const HomeSubPanel = ({ }: HomeSubPanelPropsTypes) => {
                         onPause={() => {
                             stopDownload(torrent.HexString)
                         }}
+                        onClick={() => torrentModel.setDisplayTorrent(torrent)}
                         size={torrent.TotalLength}
                         status={torrent.Status}
                         speed={torrent.DownloadSpeed}

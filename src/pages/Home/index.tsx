@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import useStyles from './style';
 import useTorrentModel from '../../models/torrents';
 import { useRequest } from 'ahooks';
@@ -8,6 +8,8 @@ import useDialogsModel, { DialogKeys } from '../../models/dialogs';
 import DownloadItem from '../../components/DownloadItem';
 import { LinkOff } from '@material-ui/icons';
 import AddTorrentFileDialog from '../../components/AddTorrentFileDialog';
+import { Grid } from '@material-ui/core';
+import InfoCard from '../../components/InfoCard';
 
 export interface HomePagePropsType {
 
@@ -34,18 +36,34 @@ const HomePage = ({}: HomePagePropsType) => {
       />
       <AddTorrentFileDialog
         onOk={(file) => {
-          addTorrentFile(file)
+          addTorrentFile(file);
           dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, false);
         }}
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, false)}
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddTorrentFileDialogKey])}
       />
-      {torrentModel.torrents.length === 0 &&
-      <div className={classes.empty}>
-        <LinkOff className={classes.emptyIcon} />
-      </div>
+      {
+        torrentModel.displayTorrent &&
+        <Fragment>
+          <div className={classes.title}>
+            {torrentModel.displayTorrent.TorrentName}
+          </div>
+          <Grid container spacing={2} className={classes.infoContainer}>
+            <Grid item>
+              <InfoCard label={torrentModel.displayTorrent?.Status} value={torrentModel.displayTorrent?.DownloadSpeed}
+                        className={classes.infoCard} />
+            </Grid>
+            <Grid item>
+              <InfoCard label={'文件大小'} value={torrentModel.displayTorrent?.TotalLength} className={classes.infoCard} />
+            </Grid>
+            <Grid item>
+              <InfoCard label={'所需时间'} value={torrentModel.displayTorrent?.LeftTime} className={classes.infoCard} />
+            </Grid>
+          </Grid>
+        </Fragment>
       }
-     
+
+
     </div>
   );
 };

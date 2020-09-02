@@ -10,21 +10,17 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingRight:theme.spacing(2),
       paddingTop:theme.spacing(8),
       paddingBottom:theme.spacing(2),
-      boxSizing:"border-box"
+      boxSizing:"border-box",
+      overflowX:"hidden"
     },
-    empty:{
-      height: "100%",
-      textAlign:"center",
-      display:"flex",
-      justifyContent:"center",
-      alignItems:"center"
+    title:{
+      ...theme.typography.h6,
     },
-    emptyIcon:{
-      color:theme.palette.grey['500'],
-      fontSize:theme.spacing(10)
+    infoContainer:{
+      marginTop:theme.spacing(3)
     },
-    item:{
-      marginBottom:theme.spacing(1)
+    infoCard:{
+      minWidth:theme.spacing(30)
     }
   }),
 );
