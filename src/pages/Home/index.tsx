@@ -10,12 +10,13 @@ import { LinkOff } from '@material-ui/icons';
 import AddTorrentFileDialog from '../../components/AddTorrentFileDialog';
 import { Grid } from '@material-ui/core';
 import InfoCard from '../../components/InfoCard';
+import FileItem from '../../components/TorrentFileItem';
 
 export interface HomePagePropsType {
 
 }
 
-const HomePage = ({}: HomePagePropsType) => {
+const HomePage = ({ }: HomePagePropsType) => {
   const classes = useStyles();
   const torrentModel = useTorrentModel();
   const dialogsModel = useDialogsModel();
@@ -51,7 +52,7 @@ const HomePage = ({}: HomePagePropsType) => {
           <Grid container spacing={2} className={classes.infoContainer}>
             <Grid item>
               <InfoCard label={torrentModel.displayTorrent?.Status} value={torrentModel.displayTorrent?.DownloadSpeed}
-                        className={classes.infoCard} />
+                className={classes.infoCard} />
             </Grid>
             <Grid item>
               <InfoCard label={'文件大小'} value={torrentModel.displayTorrent?.TotalLength} className={classes.infoCard} />
@@ -60,6 +61,17 @@ const HomePage = ({}: HomePagePropsType) => {
               <InfoCard label={'所需时间'} value={torrentModel.displayTorrent?.LeftTime} className={classes.infoCard} />
             </Grid>
           </Grid>
+          <div className={classes.label}>
+            文件信息
+          </div>
+          {
+            torrentModel.displayTorrent.Files.map((file,idx) => (
+              <div className={classes.fileItem} key={idx}>
+                <FileItem fileSize={file.Size} filename={file.Path}  />
+              </div>
+            ))
+          }
+
         </Fragment>
       }
 

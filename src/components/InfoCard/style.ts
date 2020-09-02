@@ -10,7 +10,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     value:{
       ...theme.typography.h4,
-      marginTop:theme.spacing(2)
+      fontSize:18,
+      fontWeight:400,
+      marginTop:theme.spacing(1)
     }
   }),
 );

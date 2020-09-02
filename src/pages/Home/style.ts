@@ -20,7 +20,15 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop:theme.spacing(3)
     },
     infoCard:{
-      minWidth:theme.spacing(30)
+      minWidth:theme.spacing(20)
+    },
+    label:{
+      ...theme.typography.caption,
+      marginTop:theme.spacing(2),
+      marginBottom:theme.spacing(2)
+    },
+    fileItem:{
+      marginBottom:theme.spacing(2)
     }
   }),
 );

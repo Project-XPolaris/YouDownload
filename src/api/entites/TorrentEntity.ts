@@ -1,3 +1,5 @@
+import { FileEntity } from "./FileEntity";
+
 export interface TorrentEntity {
   TorrentName: string
   TotalLength: string
@@ -5,5 +7,6 @@ export interface TorrentEntity {
   Percentage: number
   DownloadSpeed: string
   LeftTime: string
-  HexString:string
+  HexString: string
+  Files: FileEntity[]
 }
