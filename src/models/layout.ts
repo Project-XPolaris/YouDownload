@@ -4,7 +4,7 @@ import { getAllTorrent } from '../api/torrent';
 import { TorrentEntity } from '../api/entites/TorrentEntity';
 
 function useLayoutModel() {
-  const [activeNav,setActiveNav] = useState("All")
+  const [activeNav,setActiveNav] = useState("Engine")
   return {
     activeNav,
     setActiveNav

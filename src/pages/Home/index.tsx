@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import useStyles from './style';
 import useTorrentModel from '../../models/torrents';
 import { useRequest } from 'ahooks';
@@ -20,6 +20,9 @@ const HomePage = ({ }: HomePagePropsType) => {
   const classes = useStyles();
   const torrentModel = useTorrentModel();
   const dialogsModel = useDialogsModel();
+  useEffect(() => {
+    torrentModel.loadAllTask()
+  })
   const { data, loading, run } = useRequest(torrentModel.loadAllTask, {
     pollingInterval: 1000,
     pollingWhenHidden: false,

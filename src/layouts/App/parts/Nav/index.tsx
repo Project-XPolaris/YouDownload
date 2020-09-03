@@ -9,7 +9,7 @@ import {
   GetAppOutlined,
   Home, ListAlt,
   Pause,
-  PauseOutlined,
+  PauseOutlined, Power,
 } from '@material-ui/icons';
 import useTorrentModel from '../../../../models/torrents';
 import useLayoutModel from '../../../../models/layout';
@@ -29,6 +29,10 @@ const AppNavigation = ({}: AppNavigationPropsType) => {
   const torrentModel = useTorrentModel();
   const layoutModel = useLayoutModel();
   const torrentNavs: NavItem[] = [
+    {
+      key: 'Engine',
+      icon: <Power />,
+    },
     {
       key: 'Running',
       icon: <GetApp />,

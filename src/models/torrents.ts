@@ -6,13 +6,16 @@ import { TorrentEntity } from '../api/entites/TorrentEntity';
 function useTorrentModel() {
   const [torrents,setTorrents] = useState<TorrentEntity[]>([])
   const [sortKey,setSortKey] = useState<string>("name")
-  const [statusFilter,setStatusFilter] = useState<string | undefined>("Running")
+  const [statusFilter,setStatusFilter] = useState<string | undefined>("Engine")
   const [displayTorrent,setDisplayTorrent] = useState<TorrentEntity | undefined>(undefined)
   const loadAllTask = async () => {
     let result = await getAllTorrent()
     result = result.sort((a:TorrentEntity,b:TorrentEntity) => a.TorrentName.localeCompare(b.TorrentName))
     if (statusFilter === "Completed"){
       result = result.filter(it => it.Status === "Completed")
+    }
+    if (statusFilter === "Engine"){
+      result = result.filter(it => it.Status !== "Completed")
     }
     if (statusFilter === "Running") {
       result = result.filter(it => it.Status === "Running")
