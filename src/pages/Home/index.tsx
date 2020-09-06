@@ -8,7 +8,7 @@ import {
   startDownload,
   stopDownload,
   deleteTorrent,
-  getAllTorrent,
+  getAllTorrent, changeFilePriority,
 } from '../../api/torrent';
 import AddMargaretLinkDialog from '../../components/AddMargaretLinkDialog';
 import useDialogsModel, { DialogKeys } from '../../models/dialogs';
@@ -71,11 +71,15 @@ const HomePage = ({torrent}: HomePagePropsType) => {
           {
             torrent.Files.map((file, idx) => (
               <div className={classes.fileItem} key={idx}>
-                <FileItem fileSize={file.Size} filename={file.Path} />
+                <FileItem
+                  fileSize={file.Size}
+                  filename={file.Path}
+                  priority={file.Priority}
+                  onChangePriority={level => changeFilePriority(torrent?.HexString,file.Path,level)}
+                />
               </div>
             ))
           }
-
         </Fragment>
       }
 

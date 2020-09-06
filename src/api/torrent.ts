@@ -44,3 +44,13 @@ export const deleteTorrent = async(hexString:string) => {
     data: requestForm,
   });
 }
+
+export const changeFilePriority = async (hexString:string,path : string,level : number) => {
+  const requestForm = new FormData();
+  requestForm.append('hexString', hexString);
+  requestForm.append('filePath',path)
+  requestForm.append('level',level.toString())
+  return await apiRequest.post('/torrent/setFilePriority', {
+    data: requestForm,
+  });
+}
