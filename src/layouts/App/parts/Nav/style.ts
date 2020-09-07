@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: theme.spacing(4),
       marginBottom:theme.spacing(2),
       "-webkit-app-region":"drag"
+    },
+    divider:{
+      backgroundColor:"#555555",
+      margin:theme.spacing(2)
     }
   }),
 );

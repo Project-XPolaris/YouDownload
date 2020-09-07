@@ -4,21 +4,23 @@ import AppNavigation from './parts/Nav';
 import useStyles from './style';
 import AppBar from './parts/Bar';
 import SubPanel from './parts/Sub';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export interface AppLayoutPropsType {
 
 }
 
-const AppLayout = ({}: AppLayoutPropsType) => {
+const AppLayout = ({ }: AppLayoutPropsType) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <AppNavigation />
-      <AppBar />
-      <div className={classes.main}>
-      
-        <AppRouter />
-      </div>
+      <Router>
+        <AppNavigation />
+        <AppBar />
+        <div className={classes.main}>
+          <AppRouter />
+        </div>
+      </Router>
     </div>
   );
 };

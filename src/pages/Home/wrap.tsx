@@ -7,7 +7,7 @@ import { getAllTorrent } from '../../api/torrent';
 import useTorrentModel, { reduceTorrent } from '../../models/torrents';
 import { TorrentEntity } from '../../api/entites/TorrentEntity';
 
-const HomePageWrap = ({  }) => {
+const HomePageWrap = ({ }) => {
   const torrentModel = useTorrentModel();
 
   const { data }: { data: any } = useRequest(getAllTorrent, {
@@ -17,9 +17,9 @@ const HomePageWrap = ({  }) => {
   });
   let result = undefined
   let displayTorrent = undefined
-  if (data){
+  if (data) {
     result = reduceTorrent(data, { statusFilter: torrentModel.statusFilter });
-    displayTorrent = data.find((it:TorrentEntity) => it.HexString === torrentModel.displayTorrent)
+    displayTorrent = data.find((it: TorrentEntity) => it.HexString === torrentModel.displayTorrent)
   }
 
   return (
@@ -27,7 +27,7 @@ const HomePageWrap = ({  }) => {
       <SubPanel>
         <HomeSubPanel tasks={result} />
       </SubPanel>
-      <HomePage torrent={displayTorrent}/>
+      <HomePage torrent={displayTorrent} />
     </div>
   );
 };

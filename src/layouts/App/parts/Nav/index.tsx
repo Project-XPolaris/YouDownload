@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconButton, Paper } from '@material-ui/core';
+import { IconButton, Paper, Divider } from '@material-ui/core';
 import useStyles from './style';
 import {
   Check,
@@ -9,11 +9,12 @@ import {
   GetAppOutlined,
   Home, ListAlt,
   Pause,
-  PauseOutlined, Power,
+  PauseOutlined, Power, Settings,
 } from '@material-ui/icons';
 import useTorrentModel from '../../../../models/torrents';
 import useLayoutModel from '../../../../models/layout';
 import logo from "../../../../assets/icon.png"
+import { useHistory } from "react-router-dom";
 
 export interface AppNavigationPropsType {
 
@@ -24,10 +25,11 @@ interface NavItem {
   icon: any
 }
 
-const AppNavigation = ({}: AppNavigationPropsType) => {
+const AppNavigation = ({ }: AppNavigationPropsType) => {
   const classes = useStyles();
   const torrentModel = useTorrentModel();
   const layoutModel = useLayoutModel();
+  const history = useHistory()
   const torrentNavs: NavItem[] = [
     {
       key: 'Engine',
@@ -51,13 +53,16 @@ const AppNavigation = ({}: AppNavigationPropsType) => {
     },
 
   ];
-  const onTorrentStatusNavChange = (key:string) => {
+  const onTorrentStatusNavChange = (key: string) => {
+    if (history.location.pathname !== "/"){
+      history.push("/")
+    }
     layoutModel.setActiveNav(key)
     torrentModel.setStatusFilter(key)
   }
   return (
     <div className={classes.root}>
-      <img src={logo} className={classes.logo}/>
+      <img src={logo} className={classes.logo} />
       {
         torrentNavs.map(it => (
           <IconButton
@@ -69,6 +74,16 @@ const AppNavigation = ({}: AppNavigationPropsType) => {
           </IconButton>
         ))
       }
+      <Divider className={classes.divider}/>
+      <IconButton 
+      className={layoutModel.activeNav === "settings" ? classes.navButtonActive : classes.navButton} 
+      onClick={() => {      
+        history.push("/settings")
+        layoutModel.setActiveNav("settings")
+      }}
+      >
+        <Settings />
+      </IconButton>
     </div>
   );
 };

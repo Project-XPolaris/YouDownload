@@ -5,15 +5,17 @@ import { ArrowBack, ArrowLeft, Close, Description, Fullscreen, Link, Minimize, R
 import useDialogsModel, { DialogKeys } from '../../../../models/dialogs';
 import { useHistory } from 'react-router-dom';
 import { app, remote } from '../../../../remote';
-
+import HomePageAction from '../../../../pages/Home/bar';
+import useLayoutModel from "../../../../models/layout"
+import SettingPageAction from '../../../../pages/Settings/bar';
 export interface AppBarPropsType {
 
 }
 
 const AppBar = ({ }: AppBarPropsType) => {
   const classes = useStyles();
-  const dialogsModel = useDialogsModel();
   let history = useHistory();
+  const layoutModel = useLayoutModel()
   const onClose = () => {
     app.exit();
   };
@@ -35,6 +37,14 @@ const AppBar = ({ }: AppBarPropsType) => {
   const onBack = () => {
     history.goBack();
   };
+  const renderActions = () => {
+    console.log(history.location.pathname)
+    if (layoutModel.activeNav !== "settings") {
+      return (<HomePageAction />)
+    } else {
+      return (<SettingPageAction />)
+    }
+  }
   return (
     <ApplicationBar position="static" elevation={0} className={classes.root}>
       <Toolbar variant="dense">
@@ -42,18 +52,8 @@ const AppBar = ({ }: AppBarPropsType) => {
           下载
         </Typography>
 
-        <IconButton
-          className={classes.actionIcon}
-          onClick={() => dialogsModel.setDialog(DialogKeys.AddTorrentFileDialogKey, true)}
-        >
-          <Description />
-        </IconButton>
-        <IconButton
-          className={classes.actionIcon}
-          onClick={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, true)}
-        >
-          <Link />
-        </IconButton>
+        {renderActions()}
+
         <Divider orientation={'vertical'} className={classes.divider} />
         <IconButton
           size={'small'}
