@@ -1,16 +1,8 @@
 import useStyles from './style';
 import React from 'react';
-import {
-  Paper,
-  Avatar,
-  LinearProgress,
-  Card,
-  IconButton,
-  CardActions,
-  CardContent,
-  CardActionArea,
-} from '@material-ui/core';
-import { Folder, Favorite, Share, Stop, PlayArrow, DeleteForever, Pause, Speed, DataUsage } from '@material-ui/icons';
+import { Avatar, Card, CardActionArea, IconButton, LinearProgress } from '@material-ui/core';
+import { DataUsage, DeleteForever, Folder, Pause, PlayArrow, Speed } from '@material-ui/icons';
+import clsx from 'clsx';
 
 export interface DownloadTaskItemPropsTypes {
   title: string
@@ -22,15 +14,16 @@ export interface DownloadTaskItemPropsTypes {
   speed: string
   size: string
   onClick: () => void
+  type:string
 }
 
-const DownloadTaskItem = ({ title, progress, onStart, onPause, onDelete, status, speed, size, onClick }: DownloadTaskItemPropsTypes) => {
+const DownloadTaskItem = ({ title, progress, onStart, onPause, onDelete, status, speed, size, onClick, type }: DownloadTaskItemPropsTypes) => {
   const classes = useStyles();
   const displayProgress = Math.round(progress * 100);
   return (
     <Card className={classes.root}>
       <CardActionArea className={classes.header} onClick={onClick}>
-        <Avatar className={classes.icon}>
+        <Avatar className={clsx(classes.icon,type === "Torrent" ? classes.iconTorrent : classes.iconFile)}>
           <Folder />
         </Avatar>
         <div className={classes.meta}>

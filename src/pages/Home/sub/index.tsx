@@ -5,8 +5,10 @@ import useTorrentModel from "../../../models/torrents"
 import useDialogsModel from "../../../models/dialogs"
 import { deleteTorrent, startDownload, stopDownload } from "../../../api/torrent"
 import { TorrentEntity } from '../../../api/entites/TorrentEntity';
+import { DownloadTask } from '../../../api/task';
+import { startFileDownload, stopFileDownload } from '../../../api/file';
 export interface HomeSubPanelPropsTypes {
-    tasks?:TorrentEntity[]
+    tasks?:DownloadTask[]
 }
 const HomeSubPanel = ({ tasks = []}: HomeSubPanelPropsTypes) => {
     const classes = useStyles()
@@ -18,27 +20,39 @@ const HomeSubPanel = ({ tasks = []}: HomeSubPanelPropsTypes) => {
                 tasks.map((torrent, idx) => (
                     <DownloadTaskItem
                         key={idx}
-                        title={torrent.TorrentName}
-                        progress={torrent.Percentage}
+                        title={torrent.name}
+                        progress={torrent.progress}
                         onStart={() => {
-                            startDownload(torrent.HexString)
+                            if (torrent.type === "Torrent") {
+                                startDownload(torrent.id)
+                            }
+                            if (torrent.type === "File") {
+                                startFileDownload(torrent.id)
+                            }
+
                         }}
                         onPause={() => {
-                            stopDownload(torrent.HexString)
+                            if (torrent.type === "Torrent") {
+                                stopDownload(torrent.id)
+                            }
+                            if (torrent.type === "File") {
+                                stopFileDownload(torrent.id)
+                            }
                         }}
-                        onClick={() => torrentModel.setDisplayTorrent(torrent.HexString)}
-                        size={torrent.TotalLength}
-                        status={torrent.Status}
-                        speed={torrent.DownloadSpeed}
+                        onClick={() => torrentModel.setDisplayTorrent(torrent.id)}
+                        size={torrent.total_size}
+                        status={torrent.status}
+                        speed={torrent.speed}
                         onDelete={() => {
                             dialogsModel.showConfirmDialog({
                                 title: "删除确认",
                                 content: "是否删除任务？",
                                 onOk: () => {
-                                    deleteTorrent(torrent.HexString)
+                                    deleteTorrent(torrent.id)
                                 }
                             })
                         }}
+                        type={torrent.type}
                     />
                 ))
             }

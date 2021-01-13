@@ -4,6 +4,7 @@ import { useState } from 'react';
 export const DialogKeys = {
   AddMargaretDialogKey: 'add/margaret',
   AddTorrentFileDialogKey: 'add/torrentFile',
+  AddLinkDialogKey: 'add/link',
   ConfirmDialogKey: 'global/confirm',
 };
 export interface ConfirmDialogOption {

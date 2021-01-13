@@ -1,9 +1,10 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { orange } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-     
+
       margin:theme.spacing(2)
     },
     header:{
@@ -12,11 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
       padding:theme.spacing(2),
     },
     icon:{
-      backgroundColor:theme.palette.primary.dark,
       color:theme.palette.primary.contrastText
     },
     content:{
-      
+
       padding:theme.spacing(2),
     },
     meta:{
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow:1,
     },
     downloadProgress:{
-      
+
       display:"flex",
       alignItems:"center"
     },
@@ -58,6 +58,12 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     infoIcon:{
       marginRight:theme.spacing(1)
+    },
+    iconFile:{
+      backgroundColor: theme.palette.primary.dark
+    },
+    iconTorrent:{
+      backgroundColor: orange[500]
     }
   }),
 );

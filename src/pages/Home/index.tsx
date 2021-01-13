@@ -19,9 +19,12 @@ import { Grid } from '@material-ui/core';
 import InfoCard from '../../components/InfoCard';
 import FileItem from '../../components/TorrentFileItem';
 import { TorrentEntity } from '../../api/entites/TorrentEntity';
+import { DownloadTask } from '../../api/task';
+import AddDownloadLinkDialog from '../../components/AddDownloadLinkDialog';
+import { addFileDownloadTask } from '../../api/file';
 
 export interface HomePagePropsType {
-  torrent?:TorrentEntity
+  torrent?:DownloadTask
 }
 
 const HomePage = ({torrent}: HomePagePropsType) => {
@@ -39,6 +42,14 @@ const HomePage = ({torrent}: HomePagePropsType) => {
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, false)}
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddMargaretDialogKey])}
       />
+      <AddDownloadLinkDialog
+        onOk={(link) => {
+          addFileDownloadTask(link,".");
+          dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false);
+        }}
+        onCancel={() => dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false)}
+        open={Boolean(dialogsModel.activeDialog[DialogKeys.AddLinkDialogKey])}
+      />
       <AddTorrentFileDialog
         onOk={(file) => {
           addTorrentFile(file);
@@ -51,35 +62,35 @@ const HomePage = ({torrent}: HomePagePropsType) => {
         torrent &&
         <Fragment>
           <div className={classes.title}>
-            {torrent.TorrentName}
+            {torrent.name}
           </div>
           <Grid container spacing={2} className={classes.infoContainer}>
             <Grid item>
-              <InfoCard label={torrent.Status} value={torrent.DownloadSpeed}
+              <InfoCard label={torrent.status} value={torrent.speed}
                         className={classes.infoCard} />
             </Grid>
             <Grid item>
-              <InfoCard label={'文件大小'} value={torrent.TotalLength} className={classes.infoCard} />
+              <InfoCard label={'文件大小'} value={torrent.total_size} className={classes.infoCard} />
             </Grid>
-            <Grid item>
-              <InfoCard label={'所需时间'} value={torrent.LeftTime} className={classes.infoCard} />
-            </Grid>
+            {/*<Grid item>*/}
+            {/*  <InfoCard label={'所需时间'} value={torrent.LeftTime} className={classes.infoCard} />*/}
+            {/*</Grid>*/}
           </Grid>
-          <div className={classes.label}>
-            文件信息
-          </div>
-          {
-            torrent.Files.map((file, idx) => (
-              <div className={classes.fileItem} key={idx}>
-                <FileItem
-                  fileSize={file.Size}
-                  filename={file.Path}
-                  priority={file.Priority}
-                  onChangePriority={level => changeFilePriority(torrent?.HexString,file.Path,level)}
-                />
-              </div>
-            ))
-          }
+          {/*<div className={classes.label}>*/}
+          {/*  文件信息*/}
+          {/*</div>*/}
+          {/*{*/}
+          {/*  torrent.Files.map((file, idx) => (*/}
+          {/*    <div className={classes.fileItem} key={idx}>*/}
+          {/*      <FileItem*/}
+          {/*        fileSize={file.Size}*/}
+          {/*        filename={file.Path}*/}
+          {/*        priority={file.Priority}*/}
+          {/*        onChangePriority={level => changeFilePriority(torrent?.HexString,file.Path,level)}*/}
+          {/*      />*/}
+          {/*    </div>*/}
+          {/*  ))*/}
+          {/*}*/}
         </Fragment>
       }
 
