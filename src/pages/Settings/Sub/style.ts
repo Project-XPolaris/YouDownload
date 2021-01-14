@@ -6,7 +6,13 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor:theme.palette.background.default,
       height:"100vh"
     },
-   
+   header:{
+      display: 'flex',
+     padding:theme.spacing(2)
+   },
+    chip:{
+      marginRight: theme.spacing(2)
+    }
   }),
 );
 

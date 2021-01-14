@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       backgroundColor:"#EEE",
       height:"100vh",
-      overflowY:"scroll",
+      overflowY:"auto",
       paddingLeft:theme.spacing(2),
       paddingRight:theme.spacing(2),
       paddingTop:theme.spacing(8),

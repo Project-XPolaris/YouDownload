@@ -1,7 +1,7 @@
 import useStyles from "./style"
 import React from "react"
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core"
-import { Public, SettingsInputComponent, Folder, TrackChanges } from "@material-ui/icons"
+import { List, ListItem, ListItemIcon, ListItemText, Chip } from "@material-ui/core"
+import { Public, SettingsInputComponent, Folder, TrackChanges,SwapVert,CloudDownload } from "@material-ui/icons"
 import useSettingsModel from "../model"
 
 export interface SettingsSubPanelPropsTypes {
@@ -9,26 +9,10 @@ export interface SettingsSubPanelPropsTypes {
 }
 const settingNavs: Array<{ title: string, key: any, icon: any }> = [
     {
-        key: "proxy",
-        title: "代理",
-        icon: <Public />
+        key: "torrent",
+        title: "Torrent",
+        icon: <CloudDownload />
     },
-    {
-        key: "connection",
-        title: "连接",
-        icon: <SettingsInputComponent />
-    },
-    {
-        key: "folder",
-        title: "路径",
-        icon: <Folder />
-    },
-    {
-        key: "tracker",
-        title: "Tracker",
-        icon: <TrackChanges />
-    },
-
 ]
 const SettingsSubPanel = ({ }: SettingsSubPanelPropsTypes) => {
     const classes = useStyles()
@@ -48,8 +32,6 @@ const SettingsSubPanel = ({ }: SettingsSubPanelPropsTypes) => {
                     ))
                 }
             </List>
-
-
         </div>
     )
 }

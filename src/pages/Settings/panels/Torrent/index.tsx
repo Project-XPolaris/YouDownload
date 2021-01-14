@@ -2,20 +2,20 @@ import useStyles from "./style"
 import React from "react"
 import useSettingsModel from "../../model"
 import SettingPanel from "../../../../components/SettingsPanel"
-export interface ConnectionSettingPanelPropsTypes {
+export interface TorrentSettingPanelPropsTypes {
 
 }
-const ConnectionSettingPanel = ({ }: ConnectionSettingPanelPropsTypes) => {
+const TorrentSettingPanel = ({ }: TorrentSettingPanelPropsTypes) => {
     const classes = useStyles()
     const settingsModel = useSettingsModel()
     return (
         <div className={classes.root}>
             <SettingPanel
-                fields={settingsModel.settingFields.connection}
-                onValueChange={(key: string, value: any) => settingsModel.updateValue("connection", key, value)}
+                fields={settingsModel.settingFields.torrent}
+                onValueChange={(key: string, value: any) => settingsModel.updateValue("torrent", key, value)}
             />
         </div>
     )
 }
 
-export default ConnectionSettingPanel
+export default TorrentSettingPanel

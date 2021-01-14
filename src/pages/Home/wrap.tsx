@@ -20,14 +20,14 @@ const HomePageWrap = ({ }) => {
   let result = undefined
   let displayTorrent = undefined
   if (data?.tasks) {
-    // result = reduceTorrent(data, { statusFilter: torrentModel.statusFilter });
+    result = reduceTorrent(data?.tasks, { statusFilter: torrentModel.statusFilter });
     displayTorrent = data?.tasks.find((it: DownloadTask) => it.id === torrentModel.displayTorrent)
   }
 
   return (
     <div>
       <SubPanel>
-        <HomeSubPanel tasks={data?.tasks} />
+        <HomeSubPanel tasks={result} />
       </SubPanel>
       <HomePage torrent={displayTorrent}/>
     </div>

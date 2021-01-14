@@ -12,14 +12,14 @@ export interface SettingField {
     title: string
 }
 function useSettingsModel() {
-    const [active, setActive] = useState<"proxy" | "connection" | "folder" | "tracker">("proxy")
+    const [active, setActive] = useState<"torrent">("torrent")
     const [settingFields, setSettingFields] = useState<{ [key: string]: Array<SettingField> }>({
         proxy: []
     })
     const refreshSetting = async () => {
         const config: ConfigEntity = await getSetting()
         setSettingFields({
-            proxy: [
+            torrent:[
                 {
                     key: "UseSocksproxy",
                     defaultValue: config.UseSocksproxy,
@@ -34,8 +34,6 @@ function useSettingsModel() {
                     type: "text",
                     title: "Socks代理URL",
                 },
-            ],
-            connection: [
                 {
                     key: "MaxEstablishedConns",
                     defaultValue: config.MaxEstablishedConns,
@@ -56,9 +54,7 @@ function useSettingsModel() {
                     value: config.DisableIPv6 ?? false,
                     type: "switch",
                     title: "关闭IPV6",
-                }
-            ],
-            folder:[
+                },
                 {
                     key: "Tmpdir",
                     defaultValue: config.Tmpdir,
@@ -73,8 +69,6 @@ function useSettingsModel() {
                     type: "text",
                     title: "下载文件夹",
                 },
-            ],
-            tracker:[
                 {
                     key: "EnableDefaultTrackers",
                     defaultValue: config.EnableDefaultTrackers,
@@ -89,7 +83,7 @@ function useSettingsModel() {
                     type: "text",
                     title: "默认Tracker来源",
                 },
-            ]
+            ],
         })
     }
     const updateValue = (group: string, key: string, value: any) => {

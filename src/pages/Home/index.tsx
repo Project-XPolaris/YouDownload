@@ -22,6 +22,7 @@ import { TorrentEntity } from '../../api/entites/TorrentEntity';
 import { DownloadTask } from '../../api/task';
 import AddDownloadLinkDialog from '../../components/AddDownloadLinkDialog';
 import { addFileDownloadTask } from '../../api/file';
+import PathSelectDialog from '../../components/PathSelectDialog';
 
 export interface HomePagePropsType {
   torrent?:DownloadTask
@@ -34,6 +35,14 @@ const HomePage = ({torrent}: HomePagePropsType) => {
 
   return (
     <div className={classes.root}>
+      <PathSelectDialog
+        open={Boolean(dialogsModel.activeDialog[DialogKeys.AddLinkDialogKey])}
+        onCancel={() => dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false)}
+        onOk={(addr, path) => {
+          addFileDownloadTask(addr,path);
+          dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false);
+        }}
+      />
       <AddMargaretLinkDialog
         onOk={(link) => {
           addMargaretLink(link);
@@ -41,14 +50,6 @@ const HomePage = ({torrent}: HomePagePropsType) => {
         }}
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddMargaretDialogKey, false)}
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddMargaretDialogKey])}
-      />
-      <AddDownloadLinkDialog
-        onOk={(link) => {
-          addFileDownloadTask(link,".");
-          dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false);
-        }}
-        onCancel={() => dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false)}
-        open={Boolean(dialogsModel.activeDialog[DialogKeys.AddLinkDialogKey])}
       />
       <AddTorrentFileDialog
         onOk={(file) => {

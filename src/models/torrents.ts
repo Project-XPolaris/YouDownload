@@ -1,21 +1,20 @@
 import { useState } from 'react';
 import { createModel } from 'hox';
-import { getAllTorrent } from '../api/torrent';
-import { TorrentEntity } from '../api/entites/TorrentEntity';
+import { DownloadTask } from '../api/task';
 
-export function reduceTorrent(result: TorrentEntity[], { statusFilter = 'All' }) {
-  result = result.sort((a: TorrentEntity, b: TorrentEntity) => a.TorrentName.localeCompare(b.TorrentName));
+export function reduceTorrent(result: DownloadTask[], { statusFilter = 'All' }) {
+  result = result.sort((a: DownloadTask, b: DownloadTask) => a.name.localeCompare(b.name));
   if (statusFilter === 'Completed') {
-    result = result.filter(it => it.Status === 'Completed');
+    result = result.filter(it => it.status === 'Completed');
   }
   if (statusFilter === 'Engine') {
-    result = result.filter(it => it.Status !== 'Completed');
+    result = result.filter(it => it.status !== 'Completed');
   }
   if (statusFilter === 'Running') {
-    result = result.filter(it => it.Status === 'Running');
+    result = result.filter(it => it.status === 'Running');
   }
   if (statusFilter === 'Stopped') {
-    result = result.filter(it => it.Status === 'Stopped');
+    result = result.filter(it => it.status === 'Stopped');
   }
   return result
 }

@@ -24,7 +24,6 @@ const DialogsModel = () => {
       ...activeDialog,
       [key]: open,
     });
-    console.log(activeDialog);
   };
   const showConfirmDialog = (options: ConfirmDialogOption) => {
     setConfirmDialogOptions(options)

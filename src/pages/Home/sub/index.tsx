@@ -2,11 +2,11 @@ import useStyles from "./style"
 import React from "react"
 import DownloadTaskItem from "../../../components/DownloadTaskItem"
 import useTorrentModel from "../../../models/torrents"
-import useDialogsModel from "../../../models/dialogs"
+import useDialogsModel, { DialogKeys } from '../../../models/dialogs';
 import { deleteTorrent, startDownload, stopDownload } from "../../../api/torrent"
 import { TorrentEntity } from '../../../api/entites/TorrentEntity';
 import { DownloadTask } from '../../../api/task';
-import { startFileDownload, stopFileDownload } from '../../../api/file';
+import { deleteFileDownload, startFileDownload, stopFileDownload } from '../../../api/file';
 export interface HomeSubPanelPropsTypes {
     tasks?:DownloadTask[]
 }
@@ -48,7 +48,13 @@ const HomeSubPanel = ({ tasks = []}: HomeSubPanelPropsTypes) => {
                                 title: "删除确认",
                                 content: "是否删除任务？",
                                 onOk: () => {
-                                    deleteTorrent(torrent.id)
+                                    if (torrent.type === "Torrent") {
+                                        deleteTorrent(torrent.id)
+                                    }
+                                    if (torrent.type === "File") {
+                                        deleteFileDownload(torrent.id)
+                                    }
+                                    dialogsModel.setDialog(DialogKeys.ConfirmDialogKey,false)
                                 }
                             })
                         }}

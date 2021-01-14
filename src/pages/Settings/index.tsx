@@ -3,9 +3,10 @@ import React, { useEffect } from "react"
 import useSettingsModel from "./model"
 import SettingPanel from "../../components/SettingsPanel"
 import ProxySettingPanel from "./panels/Proxy"
-import ConnectionSettingPanel from "./panels/Connection"
+import ConnectionSettingPanel from "./panels/Torrent"
 import FolderSettingPanel from "./panels/Folder"
 import TrackerSettingPanel from "./panels/Tracker"
+import TorrentSettingPanel from './panels/Torrent';
 export interface SettingsPagePropsTypes {
 
 }
@@ -16,18 +17,8 @@ const SettingsPage = ({ }: SettingsPagePropsTypes) => {
         settingsModel.refreshSetting()
     }, [])
     const getPanel = () => {
-        if (settingsModel.active === "proxy") {
-            return <ProxySettingPanel />
-
-        }
-        if (settingsModel.active === "connection") {
-            return <ConnectionSettingPanel />
-        }
-        if (settingsModel.active === "folder") {
-            return <FolderSettingPanel />
-        }
-        if (settingsModel.active === "tracker") {
-            return <TrackerSettingPanel />
+        if (settingsModel.active === "torrent") {
+            return <TorrentSettingPanel />
         }
     }
     return (

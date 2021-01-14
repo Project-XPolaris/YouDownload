@@ -11,3 +11,7 @@ export const startFileDownload = async(id:string) => {
 export const stopFileDownload = async(id:string) => {
   return await apiRequest.post("/file/pause",{data:{id}})
 }
+
+export const deleteFileDownload = async(id:string) => {
+  return await apiRequest.post("/file/delete",{data:{id}})
+}

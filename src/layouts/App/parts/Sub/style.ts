@@ -8,8 +8,9 @@ const useStyles = makeStyles((theme: Theme) =>
       height:"100vh",
       backgroundColor:"#D7D9DB",
       left:theme.spacing(8),
+      overflowY:'auto'
     },
-   
+
   }),
 );
 

@@ -49,5 +49,5 @@ export const changeFilePriority = async (hexString: string, path: string, level:
 }
 
 export const getSetting = async (): Promise<ConfigEntity> => {
-  return await apiRequest.get('/settings/config', {});
+  return await apiRequest.get('/torrent/setting', {});
 }
