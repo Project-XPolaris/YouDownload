@@ -1,6 +1,6 @@
-import React from 'react';
-import { IconButton, Paper, Divider } from '@material-ui/core';
-import useStyles from './style';
+import React from 'react'
+import { IconButton, Paper, Divider } from '@material-ui/core'
+import useStyles from './style'
 import {
   Check,
   CheckCircle,
@@ -9,12 +9,13 @@ import {
   GetAppOutlined,
   Home, ListAlt,
   Pause,
-  PauseOutlined, Power, Settings,
-} from '@material-ui/icons';
-import useTorrentModel from '../../../../models/torrents';
-import useLayoutModel from '../../../../models/layout';
-import logo from "../../../../assets/icon.png"
-import { useHistory } from "react-router-dom";
+  PauseOutlined, Power, Settings
+} from '@material-ui/icons'
+import useTorrentModel from '../../../../models/torrents'
+import useLayoutModel from '../../../../models/layout'
+import logo from '../../../../assets/icon.png'
+import { useHistory } from 'react-router-dom'
+import useTaskModel from '../../../../models/task'
 
 export interface AppNavigationPropsType {
 
@@ -26,39 +27,39 @@ interface NavItem {
 }
 
 const AppNavigation = ({ }: AppNavigationPropsType) => {
-  const classes = useStyles();
-  const torrentModel = useTorrentModel();
-  const layoutModel = useLayoutModel();
+  const classes = useStyles()
+  const taskModel = useTaskModel()
+  const layoutModel = useLayoutModel()
   const history = useHistory()
   const torrentNavs: NavItem[] = [
     {
       key: 'Engine',
-      icon: <Power />,
+      icon: <Power />
     },
     {
       key: 'Running',
-      icon: <GetApp />,
+      icon: <GetApp />
     },
     {
       key: 'Stopped',
-      icon: <Pause />,
+      icon: <Pause />
     },
     {
       key: 'Completed',
-      icon: <CheckCircle />,
+      icon: <CheckCircle />
     },
     {
       key: 'All',
-      icon: <ListAlt />,
-    },
+      icon: <ListAlt />
+    }
 
-  ];
+  ]
   const onTorrentStatusNavChange = (key: string) => {
-    if (history.location.pathname !== "/"){
-      history.push("/")
+    if (history.location.pathname !== '/') {
+      history.push('/')
     }
     layoutModel.setActiveNav(key)
-    torrentModel.setStatusFilter(key)
+    taskModel.setStatusFilter(key)
   }
   return (
     <div className={classes.root}>
@@ -75,17 +76,17 @@ const AppNavigation = ({ }: AppNavigationPropsType) => {
         ))
       }
       <Divider className={classes.divider}/>
-      <IconButton 
-      className={layoutModel.activeNav === "settings" ? classes.navButtonActive : classes.navButton} 
-      onClick={() => {      
-        history.push("/settings")
-        layoutModel.setActiveNav("settings")
-      }}
+      <IconButton
+        className={layoutModel.activeNav === 'settings' ? classes.navButtonActive : classes.navButton}
+        onClick={() => {
+          history.push('/settings')
+          layoutModel.setActiveNav('settings')
+        }}
       >
         <Settings />
       </IconButton>
     </div>
-  );
-};
+  )
+}
 
-export default AppNavigation;
+export default AppNavigation

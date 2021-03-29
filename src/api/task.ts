@@ -1,4 +1,5 @@
-import apiRequest from './request';
+import apiRequest from './request'
+import { TaskEntity } from './entites/task'
 export type DownloadTask = {
   id : string
   name : string
@@ -6,8 +7,8 @@ export type DownloadTask = {
   total_size:string
   speed:string
   status:string
-  type: "Torrent" | "File"
+  type: 'Torrent' | 'File'
 }
-export const getAllTasks = async (): Promise<{tasks:DownloadTask[]}> => {
-  return await apiRequest.get("/tasks")
+export const getAllTasks = async (): Promise<{list:TaskEntity[]}> => {
+  return await apiRequest.get('/tasks')
 }

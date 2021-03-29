@@ -1,70 +1,55 @@
-import useStyles from "./style"
-import React from "react"
-import DownloadTaskItem from "../../../components/DownloadTaskItem"
-import useTorrentModel from "../../../models/torrents"
-import useDialogsModel, { DialogKeys } from '../../../models/dialogs';
-import { deleteTorrent, startDownload, stopDownload } from "../../../api/torrent"
-import { TorrentEntity } from '../../../api/entites/TorrentEntity';
-import { DownloadTask } from '../../../api/task';
-import { deleteFileDownload, startFileDownload, stopFileDownload } from '../../../api/file';
+import useStyles from './style'
+import React from 'react'
+import DownloadTaskItem from '../../../components/DownloadTaskItem'
+import useTorrentModel from '../../../models/torrents'
+import useDialogsModel, { DialogKeys } from '../../../models/dialogs'
+import { deleteTask, startDownload, stopDownload } from '../../../api/torrent'
+import { DownloadTask } from '../../../api/task'
+import useTaskModel from '../../../models/task'
+
 export interface HomeSubPanelPropsTypes {
     tasks?:DownloadTask[]
 }
-const HomeSubPanel = ({ tasks = []}: HomeSubPanelPropsTypes) => {
-    const classes = useStyles()
-    const torrentModel = useTorrentModel()
-    const dialogsModel = useDialogsModel()
-    return (
-        <div className={classes.root}>
-            {
-                tasks.map((torrent, idx) => (
-                    <DownloadTaskItem
-                        key={idx}
-                        title={torrent.name}
-                        progress={torrent.progress}
-                        onStart={() => {
-                            if (torrent.type === "Torrent") {
-                                startDownload(torrent.id)
-                            }
-                            if (torrent.type === "File") {
-                                startFileDownload(torrent.id)
-                            }
+const HomeSubPanel = ({ tasks = [] }: HomeSubPanelPropsTypes) => {
+  const classes = useStyles()
+  const torrentModel = useTorrentModel()
+  const dialogsModel = useDialogsModel()
+  const taskModel = useTaskModel()
+  return (
+    <div className={classes.root}>
+      {
+        taskModel.getTasks().map((task, idx) => (
+          <DownloadTaskItem
+            key={idx}
+            title={task.name}
+            progress={task.progress}
+            onStart={() => {
+              startDownload(task.id)
+            }}
+            onPause={() => {
+              stopDownload(task.id)
+            }}
+            onClick={() => {}}
+            size={task.length}
+            status={task.status}
+            speed={task.speed}
+            onDelete={() => {
+              dialogsModel.showConfirmDialog({
+                title: '删除确认',
+                content: '是否删除任务？',
+                onOk: () => {
+                  deleteTask(task.id)
+                  dialogsModel.setDialog(DialogKeys.ConfirmDialogKey, false)
+                }
+              })
+            }}
+            type={task.type}
+          />
+        ))
+      }
 
-                        }}
-                        onPause={() => {
-                            if (torrent.type === "Torrent") {
-                                stopDownload(torrent.id)
-                            }
-                            if (torrent.type === "File") {
-                                stopFileDownload(torrent.id)
-                            }
-                        }}
-                        onClick={() => torrentModel.setDisplayTorrent(torrent.id)}
-                        size={torrent.total_size}
-                        status={torrent.status}
-                        speed={torrent.speed}
-                        onDelete={() => {
-                            dialogsModel.showConfirmDialog({
-                                title: "删除确认",
-                                content: "是否删除任务？",
-                                onOk: () => {
-                                    if (torrent.type === "Torrent") {
-                                        deleteTorrent(torrent.id)
-                                    }
-                                    if (torrent.type === "File") {
-                                        deleteFileDownload(torrent.id)
-                                    }
-                                    dialogsModel.setDialog(DialogKeys.ConfirmDialogKey,false)
-                                }
-                            })
-                        }}
-                        type={torrent.type}
-                    />
-                ))
-            }
-
-        </div>
-    )
+    </div>
+  )
 }
 
 export default HomeSubPanel
