@@ -23,6 +23,31 @@ const DownloadTaskItem = ({ title, progress, onStart, onPause, onDelete, status,
   const displayProgress = Math.round(progress * 100)
   const displayFileSize = fileSize(size)
   const displaySpeed = `${fileSize(speed)}/s`
+  const getActions = () => {
+    const stop = {
+      action: onPause,
+      icon: <Pause />
+    }
+    const start = {
+      action: onStart,
+      icon: <PlayArrow />
+    }
+    const deleteAction = {
+      action: onDelete,
+      icon: <DeleteForever />
+    }
+    switch (status) {
+      case 'Estimate':
+        return [deleteAction]
+      case 'Downloading':
+        return [stop, deleteAction]
+      case 'Stop':
+        return [start, deleteAction]
+      case 'Complete':
+        return [deleteAction]
+    }
+    return []
+  }
   return (
     <Card className={classes.root}>
       <CardActionArea className={classes.header} onClick={onClick}>
@@ -58,28 +83,18 @@ const DownloadTaskItem = ({ title, progress, onStart, onPause, onDelete, status,
           </div>
           <div>
             {
-              status === 'Stop' ? (
-                <IconButton
-                  onClick={onStart}
-                  size="small"
-                >
-                  <PlayArrow />
-                </IconButton>
-              ) : (
-                <IconButton
-                  onClick={onPause}
-                  size="small"
-                >
-                  <Pause />
-                </IconButton>
-              )
+              getActions().map((action, idx) => {
+                return (
+                  <IconButton
+                    onClick={action.action}
+                    size="small"
+                    key={idx}
+                  >
+                    {action.icon}
+                  </IconButton>
+                )
+              })
             }
-            <IconButton
-              size="small"
-              onClick={onDelete}
-            >
-              <DeleteForever />
-            </IconButton>
           </div>
         </div>
       </div>
