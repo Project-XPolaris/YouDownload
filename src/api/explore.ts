@@ -1,4 +1,4 @@
-import apiRequest from './request';
+import apiRequest from './request'
 
 export type FileType = 'File' | 'Directory'
 
@@ -13,7 +13,7 @@ export type FetchDirectoryContentResponse = {
   files:FileItem[]
 }
 export const fetchDirectoryContent = async (readPath:string | undefined):Promise<FetchDirectoryContentResponse> => {
-  return apiRequest.post("/util/readDir", {
-    data: {path:readPath}
+  return apiRequest.post('/util/readDir', {
+    data: { path: readPath }
   })
 }

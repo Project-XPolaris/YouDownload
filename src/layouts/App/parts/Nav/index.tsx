@@ -1,17 +1,7 @@
-import React from 'react'
-import { IconButton, Paper, Divider } from '@material-ui/core'
+import React, { ReactElement } from 'react'
+import { Divider, IconButton } from '@material-ui/core'
 import useStyles from './style'
-import {
-  Check,
-  CheckCircle,
-  CheckCircleOutline,
-  GetApp,
-  GetAppOutlined,
-  Home, ListAlt,
-  Pause,
-  PauseOutlined, Power, Settings
-} from '@material-ui/icons'
-import useTorrentModel from '../../../../models/torrents'
+import { CheckCircle, GetApp, LinkOff, ListAlt, Pause, Power, Settings } from '@material-ui/icons'
 import useLayoutModel from '../../../../models/layout'
 import logo from '../../../../assets/icon.png'
 import { useHistory } from 'react-router-dom'
@@ -26,7 +16,7 @@ interface NavItem {
   icon: any
 }
 
-const AppNavigation = ({ }: AppNavigationPropsType) => {
+const AppNavigation = ({ }: AppNavigationPropsType):ReactElement => {
   const classes = useStyles()
   const taskModel = useTaskModel()
   const layoutModel = useLayoutModel()
@@ -61,9 +51,14 @@ const AppNavigation = ({ }: AppNavigationPropsType) => {
     layoutModel.setActiveNav(key)
     taskModel.setStatusFilter(key)
   }
+  const onUnlink = () => {
+    localStorage.removeItem('apiUrl')
+    layoutModel.setActiveNav('Engine')
+    history.replace('/')
+  }
   return (
     <div className={classes.root}>
-      <img src={logo} className={classes.logo} />
+      <img src={logo} className={classes.logo} alt={"logo"} />
       {
         torrentNavs.map(it => (
           <IconButton
@@ -84,6 +79,12 @@ const AppNavigation = ({ }: AppNavigationPropsType) => {
         }}
       >
         <Settings />
+      </IconButton>
+      <IconButton
+        className={classes.navButton}
+        onClick={onUnlink}
+      >
+        <LinkOff />
       </IconButton>
     </div>
   )

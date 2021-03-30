@@ -1,71 +1,71 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { orange } from '@material-ui/core/colors';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { orange } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
 
-      margin:theme.spacing(2)
+      margin: theme.spacing(2)
     },
-    header:{
-      display:"flex",
-      alignItems:"center",
-      padding:theme.spacing(2),
+    header: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(2)
     },
-    icon:{
-      color:theme.palette.primary.contrastText
+    icon: {
+      color: theme.palette.primary.contrastText
     },
-    content:{
+    content: {
 
-      padding:theme.spacing(2),
+      padding: theme.spacing(2)
     },
-    meta:{
+    meta: {
       ...theme.typography.subtitle1,
-      overflowWrap:"break-word",
-      overflow:"hidden",
-      lineHeight:"1.5em",
-      height:"3em",
-      wordBreak:"break-all",
-      marginLeft:theme.spacing(2),
-      fontSize:14,
-      flexGrow:1,
+      overflowWrap: 'break-word',
+      overflow: 'hidden',
+      lineHeight: '1.5em',
+      height: '3em',
+      wordBreak: 'break-all',
+      marginLeft: theme.spacing(2),
+      fontSize: 14,
+      flexGrow: 1
     },
-    downloadProgress:{
+    downloadProgress: {
 
-      display:"flex",
-      alignItems:"center"
+      display: 'flex',
+      alignItems: 'center'
     },
-    progressWrap:{
-      flexGrow:1
+    progressWrap: {
+      flexGrow: 1
     },
-    progressLabel:{
+    progressLabel: {
       ...theme.typography.caption,
-      marginLeft:theme.spacing(2),
+      marginLeft: theme.spacing(2)
     },
-    actions:{
-      paddingTop:0
+    actions: {
+      paddingTop: 0
     },
-    infos:{
-      display:"flex"
+    infos: {
+      display: 'flex'
     },
-    infoWrap:{
-      display:"flex",
-      marginRight:theme.spacing(2),
-      alignItems:"center"
+    infoWrap: {
+      display: 'flex',
+      marginRight: theme.spacing(2),
+      alignItems: 'center'
     },
-    infoLabel:{
+    infoLabel: {
       ...theme.typography.caption
     },
-    infoIcon:{
-      marginRight:theme.spacing(1)
+    infoIcon: {
+      marginRight: theme.spacing(1)
     },
-    iconFile:{
+    iconFile: {
       backgroundColor: theme.palette.primary.dark
     },
-    iconTorrent:{
+    iconTorrent: {
       backgroundColor: orange[500]
     }
-  }),
-);
+  })
+)
 
 export default useStyles

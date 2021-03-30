@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { Paper, ListItem, ListItemIcon, ListItemText, Switch, ListItemSecondaryAction, Dialog, DialogContent, DialogTitle, DialogContentText, TextField, DialogActions, Button } from '@material-ui/core';
-import useStyles from './style';
-import clsx from 'clsx';
-import { Description } from '@material-ui/icons';
+import React, { ReactElement, useState } from 'react'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@material-ui/core'
+import useStyles from './style'
 
 export interface TextInputDialogPropsType {
     title: string
@@ -14,37 +20,37 @@ export interface TextInputDialogPropsType {
     label: string
 }
 
-const TextInputDialog = ({ title, open, initValue = "", content = "", onClose, onOk, label }: TextInputDialogPropsType) => {
-    const classes = useStyles()
-    const [inputValue, setInputValue] = useState<string | undefined>(undefined)
-    const onDialogOk = () => {
-        onOk(inputValue ?? initValue)
-    }
-    return (
-        <Dialog open={open} onClose={onClose}>
-            <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-            <DialogContent>
-                <DialogContentText>
-                    {content}
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    label={label}
-                    type="text"
-                    fullWidth
-                    onChange={e => setInputValue(e.target.value)}
-                />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose} color="primary">
+const TextInputDialog = ({ title, open, initValue = '', content = '', onClose, onOk, label }: TextInputDialogPropsType):ReactElement => {
+  const classes = useStyles()
+  const [inputValue, setInputValue] = useState<string | undefined>(undefined)
+  const onDialogOk = () => {
+    onOk(inputValue ?? initValue)
+  }
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle id="form-dialog-title">{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          {content}
+        </DialogContentText>
+        <TextField
+          autoFocus
+          label={label}
+          type="text"
+          fullWidth
+          onChange={e => setInputValue(e.target.value)}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
                     取消
-          </Button>
-                <Button onClick={onDialogOk} color="primary">
+        </Button>
+        <Button onClick={onDialogOk} color="primary">
                     确认
-          </Button>
-            </DialogActions>
-        </Dialog>
-    );
-};
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 
-export default TextInputDialog;
+export default TextInputDialog

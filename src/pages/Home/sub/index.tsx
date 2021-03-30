@@ -1,18 +1,15 @@
 import useStyles from './style'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import DownloadTaskItem from '../../../components/DownloadTaskItem'
-import useTorrentModel from '../../../models/torrents'
 import useDialogsModel, { DialogKeys } from '../../../models/dialogs'
 import { deleteTask, startDownload, stopDownload } from '../../../api/torrent'
-import { DownloadTask } from '../../../api/task'
 import useTaskModel from '../../../models/task'
 
 export interface HomeSubPanelPropsTypes {
-    tasks?:DownloadTask[]
+
 }
-const HomeSubPanel = ({ tasks = [] }: HomeSubPanelPropsTypes) => {
+const HomeSubPanel = ({ }: HomeSubPanelPropsTypes):ReactElement => {
   const classes = useStyles()
-  const torrentModel = useTorrentModel()
   const dialogsModel = useDialogsModel()
   const taskModel = useTaskModel()
   return (

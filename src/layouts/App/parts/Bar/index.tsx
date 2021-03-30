@@ -1,45 +1,44 @@
-import React from 'react';
-import useStyles from './style';
-import { AppBar as ApplicationBar, Divider, IconButton, Toolbar, Typography } from '@material-ui/core';
-import { ArrowBack, ArrowLeft, Close, Description, Fullscreen, Link, Minimize, Refresh } from '@material-ui/icons';
-import useDialogsModel, { DialogKeys } from '../../../../models/dialogs';
-import { useHistory } from 'react-router-dom';
-import { app, remote } from '../../../../remote';
-import HomePageAction from '../../../../pages/Home/bar';
-import useLayoutModel from "../../../../models/layout"
-import SettingPageAction from '../../../../pages/Settings/bar';
+import React, { ReactElement } from 'react'
+import useStyles from './style'
+import { AppBar as ApplicationBar, Divider, IconButton, Toolbar, Typography } from '@material-ui/core'
+import { ArrowBack, Close, Fullscreen, Minimize, Refresh } from '@material-ui/icons'
+import { useHistory } from 'react-router-dom'
+import { app, remote } from '../../../../remote'
+import HomePageAction from '../../../../pages/Home/bar'
+import useLayoutModel from '../../../../models/layout'
+import SettingPageAction from '../../../../pages/Settings/bar'
+
 export interface AppBarPropsType {
 
 }
 
-const AppBar = ({ }: AppBarPropsType) => {
-  const classes = useStyles();
-  let history = useHistory();
+const AppBar = ({ }: AppBarPropsType):ReactElement => {
+  const classes = useStyles()
+  const history = useHistory()
   const layoutModel = useLayoutModel()
   const onClose = () => {
-    app.exit();
-  };
+    app.exit()
+  }
   const onMin = () => {
-    remote.BrowserWindow.getFocusedWindow().minimize();
-  };
+    remote.BrowserWindow.getFocusedWindow().minimize()
+  }
   const onMax = () => {
-    const currentWindow = remote.BrowserWindow.getFocusedWindow();
+    const currentWindow = remote.BrowserWindow.getFocusedWindow()
     if (currentWindow.isMaximized()) {
-      currentWindow.unmaximize();
+      currentWindow.unmaximize()
     } else {
-      currentWindow.maximize();
+      currentWindow.maximize()
     }
-
-  };
+  }
   const onReload = () => {
-    remote.BrowserWindow.getFocusedWindow().reload();
-  };
+    remote.BrowserWindow.getFocusedWindow().reload()
+  }
   const onBack = () => {
-    history.goBack();
-  };
+    history.goBack()
+  }
   const renderActions = () => {
     console.log(history.location.pathname)
-    if (layoutModel.activeNav !== "settings") {
+    if (layoutModel.activeNav !== 'settings') {
       return (<HomePageAction />)
     } else {
       return (<SettingPageAction />)
@@ -91,10 +90,9 @@ const AppBar = ({ }: AppBarPropsType) => {
           <Close />
         </IconButton>
 
-
       </Toolbar>
     </ApplicationBar>
-  );
-};
+  )
+}
 
-export default AppBar;
+export default AppBar

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Avatar, IconButton, LinearProgress, Paper } from '@material-ui/core';
-import { Folder, Pause, PlayArrow, Speed, Timer, Delete } from '@material-ui/icons';
-import useStyles from './style';
+import React, { ReactElement } from 'react'
+import { Avatar, IconButton, LinearProgress, Paper } from '@material-ui/core'
+import { Folder, Pause, PlayArrow, Speed, Timer, Delete } from '@material-ui/icons'
+import useStyles from './style'
 
 export interface DownloadItemPropsType {
   status: string
@@ -15,9 +15,9 @@ export interface DownloadItemPropsType {
   onDelete: () => void
 }
 
-const DownloadItem = ({ status, name, size, progress, onStart, onPause, speed, remain, onDelete }: DownloadItemPropsType) => {
-  const displayProgress = Math.round(progress * 100);
-  const classes = useStyles();
+const DownloadItem = ({ status, name, size, progress, onStart, onPause, speed, remain, onDelete }: DownloadItemPropsType):ReactElement => {
+  const displayProgress = Math.round(progress * 100)
+  const classes = useStyles()
   return (
     <Paper className={classes.root}>
       <div className={classes.header}>
@@ -43,12 +43,12 @@ const DownloadItem = ({ status, name, size, progress, onStart, onPause, speed, r
                 <PlayArrow />
               </IconButton>
             ) : (
-                <IconButton
-                  onClick={onPause}
-                >
-                  <Pause />
-                </IconButton>
-              )
+              <IconButton
+                onClick={onPause}
+              >
+                <Pause />
+              </IconButton>
+            )
           }
           <IconButton
             onClick={onDelete}
@@ -72,7 +72,7 @@ const DownloadItem = ({ status, name, size, progress, onStart, onPause, speed, r
         </div>
       </div>
     </Paper>
-  );
-};
+  )
+}
 
-export default DownloadItem;
+export default DownloadItem

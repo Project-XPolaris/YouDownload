@@ -2,11 +2,11 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    header: {
       position: 'fixed',
-      left: theme.spacing(48),
-      width: 'calc(100% - 384px)',
-      backgroundColor: theme.palette.common.white
+      width: '100vw',
+      backgroundColor: 'white',
+      borderBottom: '1px #eeeeee solid'
     },
     title: {
       flexGrow: 1,

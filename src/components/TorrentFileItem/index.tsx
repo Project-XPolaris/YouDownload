@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react'
 import {
   Paper,
   ListItem,
@@ -6,12 +6,12 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemSecondaryAction,
-  IconButton, List, Menu, MenuItem,
-} from '@material-ui/core';
-import useStyles from './style';
-import clsx from 'clsx';
-import { Description, ImportExport } from '@material-ui/icons';
-import { filePriorityMapping } from '../../utils/filepriority';
+  IconButton, List, Menu, MenuItem
+} from '@material-ui/core'
+import useStyles from './style'
+import clsx from 'clsx'
+import { Description, ImportExport } from '@material-ui/icons'
+import { filePriorityMapping } from '../../utils/filepriority'
 
 export interface FileItemPropsType {
   className?: any
@@ -21,18 +21,18 @@ export interface FileItemPropsType {
   onChangePriority:(level:number) => void
 }
 
-const FileItem = ({ className, fileSize, filename, priority,onChangePriority }: FileItemPropsType) => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const FileItem = ({ className, fileSize, filename, priority, onChangePriority }: FileItemPropsType):ReactElement => {
+  const classes = useStyles()
+  const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = (event:any) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleClose = (level:number) => {
-    setAnchorEl(null);
+    setAnchorEl(null)
     onChangePriority(level)
-  };
+  }
   const menu = (
     <Menu
       id="priority-menu"
@@ -42,10 +42,10 @@ const FileItem = ({ className, fileSize, filename, priority,onChangePriority }: 
       onClose={handleClose}
     >
       {Object.getOwnPropertyNames(filePriorityMapping).map((key: any) => (
-        <MenuItem onClick={() => handleClose(Number(key))}>{filePriorityMapping[key]}</MenuItem>
+        <MenuItem onClick={() => handleClose(Number(key))} key={key}>{filePriorityMapping[key]}</MenuItem>
       ))}
     </Menu>
-  );
+  )
   return (
     <Paper>
       {menu}
@@ -65,7 +65,7 @@ const FileItem = ({ className, fileSize, filename, priority,onChangePriority }: 
         </ListItem>
       </List>
     </Paper>
-  );
-};
+  )
+}
 
-export default FileItem;
+export default FileItem

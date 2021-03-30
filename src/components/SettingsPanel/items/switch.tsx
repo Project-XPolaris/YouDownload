@@ -1,8 +1,7 @@
-import React from 'react';
-import { Paper, ListItem, ListItemIcon, ListItemText, Switch, ListItemSecondaryAction } from '@material-ui/core';
-import useStyles from './style';
-import clsx from 'clsx';
-import { Description } from '@material-ui/icons';
+import React from 'react'
+import { ListItem, ListItemSecondaryAction, ListItemText, Switch } from '@material-ui/core'
+import useStyles from './style'
+import clsx from 'clsx'
 
 export interface SwitchItemPropsType {
     className?: any
@@ -12,20 +11,20 @@ export interface SwitchItemPropsType {
 }
 
 const SwitchItem = ({ className, checked, title, onChange }: SwitchItemPropsType) => {
-    const classes = useStyles()
-    return (
-        <ListItem className={clsx(classes.root, className)}>
-            <ListItemText primary={title} />
-            <ListItemSecondaryAction>
-                <Switch
-                    edge="end"
-                    value={checked}
-                    checked={checked}
-                    onChange={(event) => onChange(event.target.checked)}
-                />
-            </ListItemSecondaryAction>
-        </ListItem>
-    );
-};
+  const classes = useStyles()
+  return (
+    <ListItem className={clsx(classes.root, className)}>
+      <ListItemText primary={title} />
+      <ListItemSecondaryAction>
+        <Switch
+          edge="end"
+          value={checked}
+          checked={checked}
+          onChange={(event) => onChange(event.target.checked)}
+        />
+      </ListItemSecondaryAction>
+    </ListItem>
+  )
+}
 
-export default SwitchItem;
+export default SwitchItem

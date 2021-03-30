@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactElement } from 'react'
 import useStyles from './style'
-import useTorrentModel from '../../models/torrents'
 import { addMargaretLink, addTorrentFile } from '../../api/torrent'
 import AddMargaretLinkDialog from '../../components/AddMargaretLinkDialog'
 import useDialogsModel, { DialogKeys } from '../../models/dialogs'
@@ -15,9 +14,8 @@ export interface HomePagePropsType {
   torrent?:DownloadTask
 }
 
-const HomePage = ({ torrent }: HomePagePropsType) => {
+const HomePage = ({ torrent }: HomePagePropsType):ReactElement => {
   const classes = useStyles()
-  const torrentModel = useTorrentModel()
   const dialogsModel = useDialogsModel()
 
   return (
@@ -25,8 +23,8 @@ const HomePage = ({ torrent }: HomePagePropsType) => {
       <PathSelectDialog
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddLinkDialogKey])}
         onCancel={() => dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false)}
-        onOk={(addr, path) => {
-          addFileDownloadTask(addr, path)
+        onOk={(addr) => {
+          addFileDownloadTask(addr)
           dialogsModel.setDialog(DialogKeys.AddLinkDialogKey, false)
         }}
       />

@@ -3,16 +3,15 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      backgroundColor: theme.palette.background.default,
+      height: '100vh'
+    },
+    header: {
+      display: 'flex',
       padding: theme.spacing(2)
     },
-    label: {
-      ...theme.typography.caption
-    },
-    value: {
-      ...theme.typography.h4,
-      fontSize: 18,
-      fontWeight: 400,
-      marginTop: theme.spacing(1)
+    chip: {
+      marginRight: theme.spacing(2)
     }
   })
 )

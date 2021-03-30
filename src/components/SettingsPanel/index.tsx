@@ -1,10 +1,10 @@
-import React from 'react';
-import { Paper, List } from '@material-ui/core';
-import useStyles from './style';
-import clsx from 'clsx';
-import SwitchItem from './items/switch';
-import { SettingField } from '../../pages/Settings/model';
-import TextInputItem from './items/textinput';
+import React, { ReactElement } from 'react'
+import { Paper, List } from '@material-ui/core'
+import useStyles from './style'
+import clsx from 'clsx'
+import SwitchItem from './items/switch'
+import { SettingField } from '../../pages/Settings/model'
+import TextInputItem from './items/textinput'
 
 export interface SettingPanelPropsType {
   className?: any
@@ -12,13 +12,13 @@ export interface SettingPanelPropsType {
   onValueChange: (key: string, value: any) => void
 }
 
-const SettingPanel = ({ className, fields = [], onValueChange }: SettingPanelPropsType) => {
+const SettingPanel = ({ className, fields = [], onValueChange }: SettingPanelPropsType):ReactElement => {
   const classes = useStyles()
   const renderItem = (field: SettingField) => {
-    if (field.type === "switch") {
+    if (field.type === 'switch') {
       return <SwitchItem title={field.title} checked={field.value} key={field.key} onChange={(value) => onValueChange(field.key, value)} />
     }
-    if (field.type === "text") {
+    if (field.type === 'text') {
       return (
         <TextInputItem
           title={field.title}
@@ -37,7 +37,7 @@ const SettingPanel = ({ className, fields = [], onValueChange }: SettingPanelPro
         }
       </List>
     </Paper>
-  );
-};
+  )
+}
 
-export default SettingPanel;
+export default SettingPanel

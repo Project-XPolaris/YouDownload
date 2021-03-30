@@ -1,34 +1,38 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      position:"fixed",
-      width:theme.spacing(8),
-      height:"100vh",
-      backgroundColor:"#2b2b2b",
-      paddingTop:theme.spacing(2),
-      paddingBottom:theme.spacing(2),
-      textAlign:"center",
-      boxSizing:"border-box",
-      zIndex:theme.zIndex.appBar + 1
+      position: 'fixed',
+      width: theme.spacing(8),
+      height: '100vh',
+      backgroundColor: '#2b2b2b',
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
+      textAlign: 'center',
+      boxSizing: 'border-box',
+      zIndex: theme.zIndex.appBar + 1,
+      flexDirection: 'column'
     },
-    navButton:{
-      color:theme.palette.common.white
+    navButton: {
+      color: theme.palette.common.white
     },
-    navButtonActive:{
+    navButtonActive: {
       color: theme.palette.primary.light
     },
-    logo:{
+    logo: {
       width: theme.spacing(4),
       height: theme.spacing(4),
-      marginBottom:theme.spacing(2),
-      "-webkit-app-region":"drag"
+      marginBottom: theme.spacing(2),
+      '-webkit-app-region': 'drag'
     },
-    divider:{
-      backgroundColor:"#555555",
-      margin:theme.spacing(2)
+    divider: {
+      backgroundColor: '#555555',
+      margin: theme.spacing(2)
+    },
+    gap: {
+      flexGrow: 1
     }
-  }),
-);
+  })
+)
 export default useStyles

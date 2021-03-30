@@ -2,20 +2,20 @@ import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
-import { killDownloader, runDownloader } from './downloader';
+import { killDownloader } from './downloader'
 
 let mainWindow: Electron.BrowserWindow | null
 
-function createWindow() {
+function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1100,
     height: 700,
     webPreferences: {
       nodeIntegration: true
     },
-    thickFrame:true,
-    darkTheme:true,
-    frame:false
+    thickFrame: true,
+    darkTheme: true,
+    frame: false
   })
   // runDownloader()
   if (process.env.NODE_ENV === 'development') {
@@ -35,7 +35,6 @@ function createWindow() {
     mainWindow = null
     killDownloader()
     app.quit()
-
   })
 }
 app.on('window-all-closed', () => {
@@ -48,10 +47,10 @@ app.on('ready', createWindow)
     if (process.env.NODE_ENV === 'development') {
       installExtension(REACT_DEVELOPER_TOOLS)
         .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
+        .catch((err) => console.log('An error occurred: ', err))
       installExtension(REDUX_DEVTOOLS)
         .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
+        .catch((err) => console.log('An error occurred: ', err))
     }
   })
 app.allowRendererProcessReuse = true

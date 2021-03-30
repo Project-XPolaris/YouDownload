@@ -1,9 +1,13 @@
 import { createModel } from 'hox'
 import { useInterval } from 'ahooks'
-import { DownloadTask, getAllTasks } from '../api/task'
+import { getAllTasks } from '../api/task'
 import { useState } from 'react'
 import { TaskEntity } from '../api/entites/task'
-export function reduceTask (result: TaskEntity[], { statusFilter = 'All' }) {
+
+export const reduceTask = (result: TaskEntity[], { statusFilter = 'All' }:{ statusFilter:string }) => {
+  if (result === undefined) {
+    return []
+  }
   result = result.sort((a: TaskEntity, b: TaskEntity) => a.name.localeCompare(b.name))
   if (statusFilter === 'Completed') {
     result = result.filter(it => it.status === 'Complete')

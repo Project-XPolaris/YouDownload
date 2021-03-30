@@ -1,69 +1,69 @@
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(2)
     },
     left: {
       display: 'flex',
-      alignItems:"center"
+      alignItems: 'center'
     },
-    header:{
-      display:"flex",
-      justifyContent:"space-between",
-      alignItems:"center"
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
     meta: {
       marginLeft: theme.spacing(2),
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'column'
     },
-    progressContainer:{
-      marginTop:theme.spacing(1),
-      display:"flex",
-      alignItems: "center"
+    progressContainer: {
+      marginTop: theme.spacing(1),
+      display: 'flex',
+      alignItems: 'center'
     },
-    progress:{
-      flexGrow:1,
-      marginRight:theme.spacing(2)
+    progress: {
+      flexGrow: 1,
+      marginRight: theme.spacing(2)
     },
-    progressLabel:{
+    progressLabel: {
       ...theme.typography.subtitle1
     },
-    icon:{
-      backgroundColor:theme.palette.primary.main,
-      color:theme.palette.primary.contrastText
+    icon: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText
     },
-    nameInfo:{
+    nameInfo: {
       ...theme.typography.body1,
-      fontSize:14
+      fontSize: 14
     },
-    sizeInfo:{
+    sizeInfo: {
       ...theme.typography.body1,
-      fontsize:6
+      fontsize: 6
     },
-    info:{
-      marginTop:theme.spacing(2),
-      display:"flex"
+    info: {
+      marginTop: theme.spacing(2),
+      display: 'flex'
     },
-    infoIcon:{
+    infoIcon: {
       marginRight: theme.spacing(1)
     },
-    remainInfo:{
+    remainInfo: {
       ...theme.typography.body1,
-      width:theme.spacing(40),
-      display:"flex",
-      alignItems:"center",
-      overflow:"hidden"
+      width: theme.spacing(40),
+      display: 'flex',
+      alignItems: 'center',
+      overflow: 'hidden'
     },
-    speedInfo:{
+    speedInfo: {
       ...theme.typography.body1,
       marginLeft: theme.spacing(2),
-      width:theme.spacing(40),
-      display:"flex",
-      alignItems:"center"
+      width: theme.spacing(40),
+      display: 'flex',
+      alignItems: 'center'
     }
-  }),
-);
-export default useStyles;
+  })
+)
+export default useStyles

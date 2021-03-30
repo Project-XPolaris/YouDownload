@@ -1,30 +1,30 @@
-import { createModel } from 'hox';
-import { useState } from 'react';
+import { createModel } from 'hox'
+import { useState } from 'react'
 
 export const DialogKeys = {
   AddMargaretDialogKey: 'add/margaret',
   AddTorrentFileDialogKey: 'add/torrentFile',
   AddLinkDialogKey: 'add/link',
-  ConfirmDialogKey: 'global/confirm',
-};
+  ConfirmDialogKey: 'global/confirm'
+}
 export interface ConfirmDialogOption {
   title: string
   content: string
   onOk: () => void
 }
 const DialogsModel = () => {
-  const [activeDialog, setActiveDialog] = useState<{ [key: string]: boolean }>({});
+  const [activeDialog, setActiveDialog] = useState<{ [key: string]: boolean }>({})
   const [confirmDialogOptions, setConfirmDialogOptions] = useState<ConfirmDialogOption>({
-    title: "",
-    content: "",
+    title: '',
+    content: '',
     onOk: () => { }
-  });
+  })
   const setDialog = (key: string, open: boolean) => {
     setActiveDialog({
       ...activeDialog,
-      [key]: open,
-    });
-  };
+      [key]: open
+    })
+  }
   const showConfirmDialog = (options: ConfirmDialogOption) => {
     setConfirmDialogOptions(options)
     setDialog(DialogKeys.ConfirmDialogKey, true)
@@ -35,6 +35,6 @@ const DialogsModel = () => {
     setDialog,
     showConfirmDialog,
     confirmDialogOptions
-  };
-};
-export default createModel(DialogsModel);
+  }
+}
+export default createModel(DialogsModel)

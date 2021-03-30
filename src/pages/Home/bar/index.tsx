@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, ReactElement } from 'react'
 import { Divider, IconButton } from '@material-ui/core'
 import useStyles from './style'
 import useDialogsModel, { DialogKeys } from '../../../models/dialogs'
 import { Description, Link, Add } from '@material-ui/icons'
 
-const HomePageAction = () => {
+const HomePageAction = ():ReactElement => {
   const classes = useStyles()
   const dialogsModel = useDialogsModel()
 

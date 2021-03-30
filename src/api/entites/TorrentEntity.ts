@@ -1,4 +1,4 @@
-import { FileEntity } from "./FileEntity";
+import { FileEntity } from './FileEntity'
 
 export interface TorrentEntity {
   TorrentName: string

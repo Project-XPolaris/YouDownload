@@ -1,14 +1,12 @@
-import { useState } from "react";
-import { createModel } from "hox";
-import { getAllTorrent } from '../api/torrent';
-import { TorrentEntity } from '../api/entites/TorrentEntity';
+import { useState } from 'react'
+import { createModel } from 'hox'
 
-function useLayoutModel() {
-  const [activeNav,setActiveNav] = useState("Engine")
+function useLayoutModel () {
+  const [activeNav, setActiveNav] = useState('Engine')
   return {
     activeNav,
     setActiveNav
-  };
+  }
 }
 
-export default createModel(useLayoutModel);
+export default createModel(useLayoutModel)

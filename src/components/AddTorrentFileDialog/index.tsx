@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
-import useStyles from './style';
+import React, { ChangeEvent, ReactElement, useState } from 'react'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
+import useStyles from './style'
 
 export interface AddTorrentFileDialogPropsType {
   open?: boolean
@@ -8,14 +8,14 @@ export interface AddTorrentFileDialogPropsType {
   onCancel: () => void
 }
 
-const AddTorrentFileDialog = ({ open = false, onOk, onCancel }: AddTorrentFileDialogPropsType) => {
-  const [uploadFile, setUploadFile] = useState<File>();
+const AddTorrentFileDialog = ({ open = false, onOk, onCancel }: AddTorrentFileDialogPropsType):ReactElement => {
+  const [uploadFile, setUploadFile] = useState<File>()
   const onUploadChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const files = e.target.files
     if (files !== null) {
-      setUploadFile(files[0]);
+      setUploadFile(files[0])
     }
-  };
+  }
   const classes = useStyles()
   return (
     <Dialog open={open}>
@@ -42,7 +42,7 @@ const AddTorrentFileDialog = ({ open = false, onOk, onCancel }: AddTorrentFileDi
           取消
         </Button>
         <Button onClick={() => {
-          if (uploadFile){
+          if (uploadFile) {
             onOk(uploadFile)
           }
         }} color="primary">
@@ -50,7 +50,7 @@ const AddTorrentFileDialog = ({ open = false, onOk, onCancel }: AddTorrentFileDi
         </Button>
       </DialogActions>
     </Dialog>
-  );
-};
+  )
+}
 
-export default AddTorrentFileDialog;
+export default AddTorrentFileDialog

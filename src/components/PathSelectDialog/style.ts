@@ -13,18 +13,18 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     pathHeader: {
       backgroundColor: '#2a2a2a',
-      padding: theme.spacing(2),
+      padding: theme.spacing(2)
     },
-    headerItem:{
-      marginTop:theme.spacing(1),
-      marginBottom:theme.spacing(1),
+    headerItem: {
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'center'
     },
-    headerDivider:{
-      backgroundColor:"#353535",
-      width: "100%",
-      height:1
+    headerDivider: {
+      backgroundColor: '#353535',
+      width: '100%',
+      height: 1
     },
     pathInput: {
       flex: 1,
@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme: Theme) =>
     backIcon: {
       marginRight: theme.spacing(2),
       color: 'white',
-      width:30,
+      width: 30,
       height: 30
     },
     linkIcon: {
-      marginLeft:4,
+      marginLeft: 4,
       marginRight: theme.spacing(2),
       color: 'white'
     },
