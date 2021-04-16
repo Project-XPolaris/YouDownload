@@ -45,8 +45,8 @@ const AppNavigation = ({ }: AppNavigationPropsType):ReactElement => {
 
   ]
   const onTorrentStatusNavChange = (key: string) => {
-    if (history.location.pathname !== '/') {
-      history.push('/')
+    if (history.location.pathname !== '/home') {
+      history.push('/home')
     }
     layoutModel.setActiveNav(key)
     taskModel.setStatusFilter(key)
@@ -54,11 +54,11 @@ const AppNavigation = ({ }: AppNavigationPropsType):ReactElement => {
   const onUnlink = () => {
     localStorage.removeItem('apiUrl')
     layoutModel.setActiveNav('Engine')
-    history.replace('/')
+    history.replace('/init')
   }
   return (
     <div className={classes.root}>
-      <img src={logo} className={classes.logo} alt={"logo"} />
+      <img src={logo} className={classes.logo} alt='logo' />
       {
         torrentNavs.map(it => (
           <IconButton

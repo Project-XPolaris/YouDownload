@@ -70,7 +70,8 @@
     "wait-on": "^5.0.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "copy-webpack-plugin": "^5.1.2"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

@@ -30,10 +30,10 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
     history.push('/home')
   }
   const check = () => {
-    const apiUrl = localStorage.getItem('apiUrl')
-    if (apiUrl != null) {
-      history.push('/home')
-    }
+    // const apiUrl = localStorage.getItem('apiUrl')
+    // if (apiUrl != null) {
+    //   history.push('/home')
+    // }
   }
   useEffect(() => {
     check()

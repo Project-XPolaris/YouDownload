@@ -33,7 +33,7 @@ const AppRouter = ({}: AppRouterPropsType):ReactElement => {
             </>
           </AppLayout>
         </Route>
-        <Route path='/'>
+        <Route path='/init'>
           <EmptyLayout>
             <InitPage />
           </EmptyLayout>

@@ -13,20 +13,22 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     },
+    icon: 'assets/dock.png',
     thickFrame: true,
     darkTheme: true,
     frame: false
   })
   // runDownloader()
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL('http://localhost:4000/')
+    mainWindow.loadURL('http://localhost:4000/#/init')
     mainWindow.webContents.openDevTools()
   } else {
     mainWindow.loadURL(
       url.format({
         pathname: path.join(__dirname, 'renderer/index.html'),
         protocol: 'file:',
-        slashes: true
+        slashes: true,
+        hash: 'init'
       })
     )
   }
