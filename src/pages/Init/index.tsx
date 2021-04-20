@@ -5,6 +5,9 @@ import { ArrowForward, Person } from '@material-ui/icons'
 import { useHistory } from 'react-router-dom'
 import { LoginHistory, loginHistoryManager } from '../../utils/login'
 import { useUpdate } from 'ahooks'
+import request from 'umi-request'
+import { ApplicationConfig } from '../../config'
+import { fetchServiceInfo } from '../../api/info'
 
 export interface InitPagePropsType {
 
@@ -13,20 +16,39 @@ export interface InitPagePropsType {
 const InitPage = ({}: InitPagePropsType):ReactElement => {
   const classes = useStyles()
   const history = useHistory()
-  const [apiUrl, setApiUrl] = useState<string | undefined>()
+  const [inputAPIUrl, setApiUrl] = useState<string | undefined>()
+  const [inputUsername, setUsername] = useState<string | undefined>()
+  const [inputPassword, setPassword] = useState<string | undefined>()
   const [tabIndex, setTabIndex] = useState<number>(0)
   const refresh = useUpdate()
   const loginHandler = async () => {
-    if (!apiUrl) {
+    if (!inputAPIUrl) {
       return
     }
-    const loginHistory : LoginHistory = {
-      apiUrl,
-      username: 'public',
-      token: ''
+    localStorage.setItem(ApplicationConfig.storeKey.apiUrl, inputAPIUrl)
+    const serviceInfo = await fetchServiceInfo()
+    if (inputUsername && inputPassword && serviceInfo.authEnable && serviceInfo.authUrl) {
+      const response = await request.post(serviceInfo.authUrl, { data: { username: inputUsername, password: inputPassword } })
+      if (response.token) {
+        const loginHistory : LoginHistory = {
+          apiUrl: inputAPIUrl,
+          username: inputUsername,
+          token: response.token
+        }
+        loginHistoryManager.addHistory(loginHistory)
+        localStorage.setItem(ApplicationConfig.storeKey.token, response.token)
+        localStorage.setItem(ApplicationConfig.storeKey.username, inputUsername)
+      }
+    } else {
+      const loginHistory : LoginHistory = {
+        apiUrl: inputAPIUrl,
+        username: 'public',
+        token: ''
+      }
+      localStorage.removeItem(ApplicationConfig.storeKey.token)
+      localStorage.setItem(ApplicationConfig.storeKey.username, 'public')
+      loginHistoryManager.addHistory(loginHistory)
     }
-    loginHistoryManager.addHistory(loginHistory)
-    localStorage.setItem('apiUrl', apiUrl)
     history.push('/home')
   }
   const check = () => {
@@ -75,7 +97,24 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
           fullWidth
           className={classes.input}
           onChange={(e) => setApiUrl(e.target.value)}
-          value={apiUrl}
+          value={inputAPIUrl}
+        />
+        <TextField
+          label="Username"
+          variant="outlined"
+          fullWidth
+          className={classes.input}
+          onChange={(e) => setUsername(e.target.value)}
+          value={inputUsername}
+        />
+        <TextField
+          label="Password"
+          variant="outlined"
+          fullWidth
+          type="password"
+          className={classes.input}
+          onChange={(e) => setPassword(e.target.value)}
+          value={inputPassword}
         />
       </>
     )
