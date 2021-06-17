@@ -13,7 +13,7 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     },
-    icon: 'assets/dock.png',
+    icon: path.join(__dirname, 'assets/dock.png'),
     thickFrame: true,
     darkTheme: true,
     frame: false
