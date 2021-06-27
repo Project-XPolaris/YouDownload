@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { Paper, List } from '@material-ui/core'
+import { List, Paper } from '@material-ui/core'
 import useStyles from './style'
 import clsx from 'clsx'
 import SwitchItem from './items/switch'

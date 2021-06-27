@@ -7,6 +7,7 @@ import SettingsPage from '../../pages/Settings'
 import InitPage from '../../pages/Init'
 import EmptyLayout from '../Empty'
 import AppLayout from '../App'
+import SetupPage from '../../pages/Setup'
 
 export interface AppRouterPropsType {
 
@@ -36,6 +37,11 @@ const AppRouter = ({}: AppRouterPropsType):ReactElement => {
         <Route path='/init'>
           <EmptyLayout>
             <InitPage />
+          </EmptyLayout>
+        </Route>
+        <Route path='/setup'>
+          <EmptyLayout>
+            <SetupPage />
           </EmptyLayout>
         </Route>
       </Switch>

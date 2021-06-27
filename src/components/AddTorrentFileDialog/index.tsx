@@ -19,7 +19,7 @@ const AddTorrentFileDialog = ({ open = false, onOk, onCancel }: AddTorrentFileDi
   const classes = useStyles()
   return (
     <Dialog open={open}>
-      <DialogTitle id="form-dialog-title">添加文件</DialogTitle>
+      <DialogTitle id="form-dialog-title">添加BT文件</DialogTitle>
       <DialogContent>
         <input
           id="contained-button-file"

@@ -10,14 +10,13 @@ export const DialogKeys = {
 export interface ConfirmDialogOption {
   title: string
   content: string
-  onOk: () => void
+  onOk?: () => void
 }
 const DialogsModel = () => {
   const [activeDialog, setActiveDialog] = useState<{ [key: string]: boolean }>({})
   const [confirmDialogOptions, setConfirmDialogOptions] = useState<ConfirmDialogOption>({
     title: '',
-    content: '',
-    onOk: () => { }
+    content: ''
   })
   const setDialog = (key: string, open: boolean) => {
     setActiveDialog({

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Avatar, IconButton, LinearProgress, Paper } from '@material-ui/core'
-import { Folder, Pause, PlayArrow, Speed, Timer, Delete } from '@material-ui/icons'
+import { Delete, Folder, Pause, PlayArrow, Speed, Timer } from '@material-ui/icons'
 import useStyles from './style'
 
 export interface DownloadItemPropsType {

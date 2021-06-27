@@ -5,20 +5,15 @@ import { ArrowForward, Person } from '@material-ui/icons'
 import { useHistory } from 'react-router-dom'
 import { LoginHistory, loginHistoryManager } from '../../utils/login'
 import { useUpdate } from 'ahooks'
-import request from 'umi-request'
 import { ApplicationConfig } from '../../config'
-import { fetchServiceInfo } from '../../api/info'
+import { getUserAuth } from '../../api/auth'
 
-export interface InitPagePropsType {
-
-}
-
-const InitPage = ({}: InitPagePropsType):ReactElement => {
+const InitPage = (): ReactElement => {
   const classes = useStyles()
   const history = useHistory()
   const [inputAPIUrl, setApiUrl] = useState<string | undefined>()
-  const [inputUsername, setUsername] = useState<string | undefined>()
-  const [inputPassword, setPassword] = useState<string | undefined>()
+  const [inputUsername, setUsername] = useState<string>('')
+  const [inputPassword, setPassword] = useState<string>('')
   const [tabIndex, setTabIndex] = useState<number>(0)
   const refresh = useUpdate()
   const loginHandler = async () => {
@@ -26,30 +21,29 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
       return
     }
     localStorage.setItem(ApplicationConfig.storeKey.apiUrl, inputAPIUrl)
-    const serviceInfo = await fetchServiceInfo()
-    if (inputUsername && inputPassword && serviceInfo.authEnable && serviceInfo.authUrl) {
-      const response = await request.post(serviceInfo.authUrl, { data: { username: inputUsername, password: inputPassword } })
-      if (response.token) {
-        const loginHistory : LoginHistory = {
-          apiUrl: inputAPIUrl,
-          username: inputUsername,
-          token: response.token
-        }
-        loginHistoryManager.addHistory(loginHistory)
-        localStorage.setItem(ApplicationConfig.storeKey.token, response.token)
-        localStorage.setItem(ApplicationConfig.storeKey.username, inputUsername)
+    const response = await getUserAuth(inputUsername, inputPassword)
+    if (response.token) {
+      const loginHistory: LoginHistory = {
+        apiUrl: inputAPIUrl,
+        username: inputUsername,
+        token: response.token,
       }
+      loginHistoryManager.addHistory(loginHistory)
+      localStorage.setItem(ApplicationConfig.storeKey.token, response.token)
+      localStorage.setItem(ApplicationConfig.storeKey.username, inputUsername)
     } else {
-      const loginHistory : LoginHistory = {
+      const loginHistory: LoginHistory = {
         apiUrl: inputAPIUrl,
         username: 'public',
-        token: ''
+        token: '',
       }
       localStorage.removeItem(ApplicationConfig.storeKey.token)
       localStorage.setItem(ApplicationConfig.storeKey.username, 'public')
       loginHistoryManager.addHistory(loginHistory)
     }
-    history.push('/home')
+    if (response.needInit) {
+      history.replace('/setup')
+    }
   }
   const check = () => {
     // const apiUrl = localStorage.getItem('apiUrl')
@@ -63,7 +57,7 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
     refresh()
   }, [])
   const renderHistoryView = () => {
-    const onItemClick = (loginHistory:LoginHistory) => {
+    const onItemClick = (loginHistory: LoginHistory) => {
       localStorage.setItem('apiUrl', loginHistory.apiUrl)
       history.push('/home')
     }
@@ -76,10 +70,10 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
                 <ListItem key={idx} button onClick={() => onItemClick(loginHistory)}>
                   <ListItemAvatar>
                     <Avatar>
-                      <Person/>
+                      <Person />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={loginHistory.username} secondary={loginHistory.apiUrl}/>
+                  <ListItemText primary={loginHistory.username} secondary={loginHistory.apiUrl} />
                 </ListItem>
               )
             })
@@ -92,26 +86,26 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
     return (
       <>
         <TextField
-          label="ApiUrl"
-          variant="outlined"
+          label='ApiUrl'
+          variant='outlined'
           fullWidth
           className={classes.input}
           onChange={(e) => setApiUrl(e.target.value)}
           value={inputAPIUrl}
         />
         <TextField
-          label="Username"
-          variant="outlined"
+          label='Username'
+          variant='outlined'
           fullWidth
           className={classes.input}
           onChange={(e) => setUsername(e.target.value)}
           value={inputUsername}
         />
         <TextField
-          label="Password"
-          variant="outlined"
+          label='Password'
+          variant='outlined'
           fullWidth
-          type="password"
+          type='password'
           className={classes.input}
           onChange={(e) => setPassword(e.target.value)}
           value={inputPassword}
@@ -127,12 +121,12 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
       <Tabs
         className={classes.tabs}
         value={tabIndex}
-        indicatorColor="primary"
-        textColor="primary"
+        indicatorColor='primary'
+        textColor='primary'
         onChange={(_, v) => setTabIndex(v)}
       >
-        <Tab label="Recently login" />
-        <Tab label="New login" />
+        <Tab label='Recently login' />
+        <Tab label='New login' />
       </Tabs>
       {
         tabIndex === 0 && renderHistoryView()
@@ -140,7 +134,7 @@ const InitPage = ({}: InitPagePropsType):ReactElement => {
       {
         tabIndex === 1 && renderNewLoginView()
       }
-      <Fab color="primary" className={classes.fab} onClick={loginHandler}>
+      <Fab color='primary' className={classes.fab} onClick={loginHandler}>
         <ArrowForward />
       </Fab>
     </div>

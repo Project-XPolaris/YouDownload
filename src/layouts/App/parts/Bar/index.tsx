@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import useStyles from './style'
 import { AppBar as ApplicationBar, Divider, IconButton, Toolbar, Typography } from '@material-ui/core'
-import { ArrowBack, Close, Fullscreen, Minimize, Refresh } from '@material-ui/icons'
+import { CheckBoxOutlineBlank, Close, Remove } from '@material-ui/icons'
 import { useHistory } from 'react-router-dom'
 import { app, remote } from '../../../../remote'
 import HomePageAction from '../../../../pages/Home/bar'
@@ -30,12 +30,6 @@ const AppBar = ({ }: AppBarPropsType):ReactElement => {
       currentWindow.maximize()
     }
   }
-  const onReload = () => {
-    remote.BrowserWindow.getFocusedWindow().reload()
-  }
-  const onBack = () => {
-    history.goBack()
-  }
   const renderActions = () => {
     console.log(history.location.pathname)
     if (layoutModel.activeNav !== 'settings') {
@@ -57,30 +51,16 @@ const AppBar = ({ }: AppBarPropsType):ReactElement => {
         <IconButton
           size={'small'}
           className={classes.actionIcon}
-          onClick={onBack}
-        >
-          <ArrowBack />
-        </IconButton>
-        <IconButton
-          size={'small'}
-          className={classes.actionIcon}
-          onClick={onReload}
-        >
-          <Refresh />
-        </IconButton>
-        <IconButton
-          size={'small'}
-          className={classes.actionIcon}
           onClick={onMin}
         >
-          <Minimize />
+          <Remove />
         </IconButton>
         <IconButton
           size={'small'}
           className={classes.actionIcon}
           onClick={onMax}
         >
-          <Fullscreen />
+          <CheckBoxOutlineBlank />
         </IconButton>
         <IconButton
           size={'small'}
@@ -89,7 +69,6 @@ const AppBar = ({ }: AppBarPropsType):ReactElement => {
         >
           <Close />
         </IconButton>
-
       </Toolbar>
     </ApplicationBar>
   )

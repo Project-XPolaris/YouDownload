@@ -2,7 +2,6 @@ import { app, BrowserWindow } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
-import { killDownloader } from './downloader'
 
 let mainWindow: Electron.BrowserWindow | null
 
@@ -35,12 +34,10 @@ function createWindow () {
 
   mainWindow.on('closed', () => {
     mainWindow = null
-    killDownloader()
     app.quit()
   })
 }
 app.on('window-all-closed', () => {
-  killDownloader()
   app.quit()
 })
 app.on('ready', createWindow)

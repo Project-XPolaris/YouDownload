@@ -9,39 +9,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
     },
     button: {
-      color: theme.palette.primary.dark
+      color: theme.palette.primary.main
     },
     pathHeader: {
-      backgroundColor: '#2a2a2a',
-      padding: theme.spacing(2)
-    },
-    headerItem: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(1),
       display: 'flex',
-      alignItems: 'center'
-    },
-    headerDivider: {
-      backgroundColor: '#353535',
-      width: '100%',
-      height: 1
+      alignItems: 'center',
+      padding: theme.spacing(2),
+      backgroundColor: '#EEEEEE'
     },
     pathInput: {
       flex: 1,
       marginRight: theme.spacing(2),
-      width: theme.spacing(40),
-      color: 'white'
+      width: theme.spacing(40)
     },
     backIcon: {
-      marginRight: theme.spacing(2),
-      color: 'white',
-      width: 30,
-      height: 30
-    },
-    linkIcon: {
-      marginLeft: 4,
-      marginRight: theme.spacing(2),
-      color: 'white'
+      marginRight: theme.spacing(2)
     },
     itemContainer: {
       width: theme.spacing(60),
@@ -57,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
         background: 'rgba(0,0,0,0)'
       },
       '*::-webkit-scrollbar-thumb': {
-        backgroundColor: '#909090'
+        backgroundColor: '#303030'
       }
     }
   })

@@ -2,10 +2,7 @@ import useStyles from './style'
 import React, { ReactElement, useEffect } from 'react'
 import useSettingsModel from './model'
 
-export interface SettingsPagePropsTypes {
-
-}
-const SettingsPage = ({ }: SettingsPagePropsTypes):ReactElement => {
+const SettingsPage = ():ReactElement => {
   const classes = useStyles()
   const settingsModel = useSettingsModel()
   useEffect(() => {

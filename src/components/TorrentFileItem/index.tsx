@@ -1,12 +1,15 @@
 import React, { ReactElement } from 'react'
 import {
-  Paper,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
   Avatar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
   ListItemSecondaryAction,
-  IconButton, List, Menu, MenuItem
+  ListItemText,
+  Menu,
+  MenuItem,
+  Paper,
 } from '@material-ui/core'
 import useStyles from './style'
 import clsx from 'clsx'

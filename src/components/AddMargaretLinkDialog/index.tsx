@@ -13,15 +13,17 @@ const AddMargaretLinkDialog = ({ open = false, onOk, onCancel }: AddMargaretLink
   const classes = useStyles()
   return (
     <Dialog open={open}>
-      <DialogTitle id="form-dialog-title">添加链接</DialogTitle>
+      <DialogTitle id="form-dialog-title">添加磁力链接任务</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
           id="name"
           label="链接"
+          placeholder='输入磁力链接'
           type="text"
           fullWidth
+          variant='outlined'
           onChange={(e) => setInput(e.target.value)}
           className={classes.input}
         />

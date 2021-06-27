@@ -2,6 +2,7 @@ import useStyles from './style'
 import React, { ReactElement } from 'react'
 import useSettingsModel from '../../model'
 import SettingPanel from '../../../../components/SettingsPanel'
+
 export interface TorrentSettingPanelPropsTypes {
 
 }

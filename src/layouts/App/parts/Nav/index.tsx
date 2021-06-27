@@ -6,6 +6,7 @@ import useLayoutModel from '../../../../models/layout'
 import logo from '../../../../assets/icon.png'
 import { useHistory } from 'react-router-dom'
 import useTaskModel from '../../../../models/task'
+import { useInterval } from 'ahooks'
 
 export interface AppNavigationPropsType {
 
@@ -21,6 +22,9 @@ const AppNavigation = ({ }: AppNavigationPropsType):ReactElement => {
   const taskModel = useTaskModel()
   const layoutModel = useLayoutModel()
   const history = useHistory()
+  useInterval(async () => {
+    taskModel.refreshTask()
+  }, 1000)
   const torrentNavs: NavItem[] = [
     {
       key: 'Engine',

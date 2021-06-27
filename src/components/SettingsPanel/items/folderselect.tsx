@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import useStyles from './style'
 import clsx from 'clsx'
 import { Description } from '@material-ui/icons'
 
 export interface FolderSelectItemPropsType {
-    className?: any
+    className?: string
 
 }
 
-const FolderSelectItem = ({ className }: FolderSelectItemPropsType) => {
+const FolderSelectItem = ({ className }: FolderSelectItemPropsType):ReactElement => {
   const classes = useStyles()
   return (
     <ListItem className={clsx(classes.root, className)}>

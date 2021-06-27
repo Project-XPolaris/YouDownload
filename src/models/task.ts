@@ -1,5 +1,4 @@
 import { createModel } from 'hox'
-import { useInterval } from 'ahooks'
 import { getAllTasks } from '../api/task'
 import { useState } from 'react'
 import { TaskEntity } from '../api/entites/task'
@@ -26,15 +25,15 @@ export const reduceTask = (result: TaskEntity[], { statusFilter = 'All' }:{ stat
 const TaskModel = () => {
   const [tasks, setTasks] = useState<TaskEntity[]>([])
   const [statusFilter, setStatusFilter] = useState<string>('Engine')
-  useInterval(async () => {
+  const refreshTask = async () => {
     const response = await getAllTasks()
     setTasks(response.list)
-  }, 1000)
+  }
   const getTasks = () => {
     return reduceTask(tasks, { statusFilter })
   }
   return {
-    tasks, getTasks, setStatusFilter
+    tasks, getTasks, setStatusFilter, refreshTask
   }
 }
 const useTaskModel = createModel(TaskModel)

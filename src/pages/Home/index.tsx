@@ -8,7 +8,7 @@ import { Grid } from '@material-ui/core'
 import InfoCard from '../../components/InfoCard'
 import { DownloadTask } from '../../api/task'
 import { addFileDownloadTask } from '../../api/file'
-import PathSelectDialog from '../../components/PathSelectDialog'
+import PathSelectDialog from '../../components/FolderSelectDialog'
 
 export interface HomePagePropsType {
   torrent?:DownloadTask
@@ -58,25 +58,7 @@ const HomePage = ({ torrent }: HomePagePropsType):ReactElement => {
             <Grid item>
               <InfoCard label={'文件大小'} value={torrent.total_size} className={classes.infoCard} />
             </Grid>
-            {/* <Grid item> */}
-            {/*  <InfoCard label={'所需时间'} value={torrent.LeftTime} className={classes.infoCard} /> */}
-            {/* </Grid> */}
           </Grid>
-          {/* <div className={classes.label}> */}
-          {/*  文件信息 */}
-          {/* </div> */}
-          {/* { */}
-          {/*  torrent.Files.map((file, idx) => ( */}
-          {/*    <div className={classes.fileItem} key={idx}> */}
-          {/*      <FileItem */}
-          {/*        fileSize={file.Size} */}
-          {/*        filename={file.Path} */}
-          {/*        priority={file.Priority} */}
-          {/*        onChangePriority={level => changeFilePriority(torrent?.HexString,file.Path,level)} */}
-          {/*      /> */}
-          {/*    </div> */}
-          {/*  )) */}
-          {/* } */}
         </Fragment>
       }
 

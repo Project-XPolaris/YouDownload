@@ -26,7 +26,7 @@ const HomeSubPanel = ({ }: HomeSubPanelPropsTypes):ReactElement => {
             onPause={() => {
               stopDownload(task.id)
             }}
-            onClick={() => {}}
+            onClick={undefined}
             size={task.length}
             status={task.status}
             speed={task.speed}

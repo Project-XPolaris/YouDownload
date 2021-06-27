@@ -14,7 +14,7 @@ export interface DownloadTaskItemPropsTypes {
   status: string
   speed: number
   size: number
-  onClick: () => void
+  onClick?: () => void
   type:string
 }
 
