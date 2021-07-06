@@ -26,7 +26,7 @@ const InitPage = (): ReactElement => {
       const loginHistory: LoginHistory = {
         apiUrl: inputAPIUrl,
         username: inputUsername,
-        token: response.token,
+        token: response.token
       }
       loginHistoryManager.addHistory(loginHistory)
       localStorage.setItem(ApplicationConfig.storeKey.token, response.token)
@@ -35,7 +35,7 @@ const InitPage = (): ReactElement => {
       const loginHistory: LoginHistory = {
         apiUrl: inputAPIUrl,
         username: 'public',
-        token: '',
+        token: ''
       }
       localStorage.removeItem(ApplicationConfig.storeKey.token)
       localStorage.setItem(ApplicationConfig.storeKey.username, 'public')
@@ -59,6 +59,8 @@ const InitPage = (): ReactElement => {
   const renderHistoryView = () => {
     const onItemClick = (loginHistory: LoginHistory) => {
       localStorage.setItem('apiUrl', loginHistory.apiUrl)
+      localStorage.setItem(ApplicationConfig.storeKey.token, loginHistory.token)
+      localStorage.setItem(ApplicationConfig.storeKey.username, loginHistory.username)
       history.push('/home')
     }
     return (

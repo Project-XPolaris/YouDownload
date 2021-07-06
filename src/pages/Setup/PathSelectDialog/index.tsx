@@ -28,12 +28,14 @@ const PathSelectDialog = ({ open = false, onCancel, onOk }: PathSelectDialogProp
   const [pathInput, setPathInput] = useState<string | undefined>()
   const [content, setContent] = useState<FileItem[]>([])
   const [sep, setSep] = useState<string | undefined>()
+  const [back, setBack] = useState<string | undefined>()
   useEffect(() => {
     (async () => {
       const response = await fetchDirectoryContent(currentPath)
       setContent(response.files.filter(it => it.type === 'Directory'))
       setPathInput(response.path)
       setSep(response.sep)
+      setBack(response.back)
     })()
   }, [currentPath])
   return (
@@ -50,14 +52,8 @@ const PathSelectDialog = ({ open = false, onCancel, onOk }: PathSelectDialogProp
             className={classes.backIcon}
             size={'small'}
             onClick={() => {
-              if (currentPath && sep) {
-                const parts = currentPath.split(sep)
-                parts.pop()
-                if (parts.length > 1) {
-                  setCurrentPath(parts.join(sep))
-                } else {
-                  setCurrentPath('/')
-                }
+              if (back) {
+                setCurrentPath(back)
               }
             }}
           >

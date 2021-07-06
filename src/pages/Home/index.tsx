@@ -9,15 +9,20 @@ import InfoCard from '../../components/InfoCard'
 import { DownloadTask } from '../../api/task'
 import { addFileDownloadTask } from '../../api/file'
 import PathSelectDialog from '../../components/FolderSelectDialog'
+import { TaskEntity } from '../../api/entites/task'
+import fileSize from 'filesize'
+import useTaskModel from '../../models/task'
+import humanizeDuration from 'humanize-duration'
 
 export interface HomePagePropsType {
-  torrent?:DownloadTask
+  task?: TaskEntity
 }
 
-const HomePage = ({ torrent }: HomePagePropsType):ReactElement => {
+const HomePage = ({ task }: HomePagePropsType): ReactElement => {
   const classes = useStyles()
   const dialogsModel = useDialogsModel()
-
+  const taskModel = useTaskModel()
+  const currentTask = taskModel.tasks.find(it => it.id === task?.id)
   return (
     <div className={classes.root}>
       <PathSelectDialog
@@ -45,18 +50,23 @@ const HomePage = ({ torrent }: HomePagePropsType):ReactElement => {
         open={Boolean(dialogsModel.activeDialog[DialogKeys.AddTorrentFileDialogKey])}
       />
       {
-        torrent &&
+        currentTask &&
         <Fragment>
           <div className={classes.title}>
-            {torrent.name}
+            {currentTask.name}
           </div>
           <Grid container spacing={2} className={classes.infoContainer}>
             <Grid item>
-              <InfoCard label={torrent.status} value={torrent.speed}
+              <InfoCard
+                label={`${currentTask.status}`}
+                value={`${fileSize(currentTask.speed)}/s`}
                 className={classes.infoCard} />
             </Grid>
             <Grid item>
-              <InfoCard label={'文件大小'} value={torrent.total_size} className={classes.infoCard} />
+              <InfoCard label={'文件大小'} value={fileSize(currentTask.length)} className={classes.infoCard} />
+            </Grid>
+            <Grid item xs={12}>
+              <InfoCard label={'预计时间'} value={ humanizeDuration(currentTask.eta * 1000, { round: true, language: 'zh_CN' })}/>
             </Grid>
           </Grid>
         </Fragment>

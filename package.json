@@ -31,6 +31,7 @@
     "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.3",
     "@types/electron-devtools-installer": "^2.2.0",
+    "@types/humanize-duration": "^3.25.0",
     "@types/jest": "^26.0.3",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
@@ -40,6 +41,7 @@
     "@typescript-eslint/parser": "^3.4.0",
     "babel-loader": "^8.1.0",
     "commitizen": "^4.1.2",
+    "copy-webpack-plugin": "^5.1.2",
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.2",
     "cz-conventional-changelog": "3.2.0",
@@ -70,8 +72,7 @@
     "wait-on": "^5.0.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
-    "copy-webpack-plugin": "^5.1.2"
+    "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -79,6 +80,7 @@
     "ahooks": "^2.5.0",
     "filesize": "^6.1.0",
     "hox": "^1.1.1",
+    "humanize-duration": "^3.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",

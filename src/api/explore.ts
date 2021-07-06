@@ -11,6 +11,7 @@ export type FetchDirectoryContentResponse = {
   path: string
   sep: string
   files:FileItem[]
+  back:string
 }
 export const fetchDirectoryContent = async (readPath:string | undefined):Promise<FetchDirectoryContentResponse> => {
   return apiRequest.post('/util/readDir', {

@@ -4,11 +4,12 @@ import DownloadTaskItem from '../../../components/DownloadTaskItem'
 import useDialogsModel, { DialogKeys } from '../../../models/dialogs'
 import { deleteTask, startDownload, stopDownload } from '../../../api/torrent'
 import useTaskModel from '../../../models/task'
+import { TaskEntity } from '../../../api/entites/task'
 
 export interface HomeSubPanelPropsTypes {
-
+  onTaskClick:(task:TaskEntity) => void
 }
-const HomeSubPanel = ({ }: HomeSubPanelPropsTypes):ReactElement => {
+const HomeSubPanel = ({ onTaskClick }: HomeSubPanelPropsTypes):ReactElement => {
   const classes = useStyles()
   const dialogsModel = useDialogsModel()
   const taskModel = useTaskModel()
@@ -26,7 +27,7 @@ const HomeSubPanel = ({ }: HomeSubPanelPropsTypes):ReactElement => {
             onPause={() => {
               stopDownload(task.id)
             }}
-            onClick={undefined}
+            onClick={() => onTaskClick(task)}
             size={task.length}
             status={task.status}
             speed={task.speed}
