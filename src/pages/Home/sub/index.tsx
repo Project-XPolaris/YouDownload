@@ -21,11 +21,13 @@ const HomeSubPanel = ({ onTaskClick }: HomeSubPanelPropsTypes):ReactElement => {
             key={idx}
             title={task.name}
             progress={task.progress}
-            onStart={() => {
-              startDownload(task.id)
+            onStart={async () => {
+              await startDownload(task.id)
+              await taskModel.refreshTask()
             }}
-            onPause={() => {
-              stopDownload(task.id)
+            onPause={async () => {
+              await stopDownload(task.id)
+              await taskModel.refreshTask()
             }}
             onClick={() => onTaskClick(task)}
             size={task.length}
@@ -35,9 +37,10 @@ const HomeSubPanel = ({ onTaskClick }: HomeSubPanelPropsTypes):ReactElement => {
               dialogsModel.showConfirmDialog({
                 title: '删除确认',
                 content: '是否删除任务？',
-                onOk: () => {
-                  deleteTask(task.id)
+                onOk: async () => {
+                  await deleteTask(task.id)
                   dialogsModel.setDialog(DialogKeys.ConfirmDialogKey, false)
+                  await taskModel.refreshTask()
                 }
               })
             }}

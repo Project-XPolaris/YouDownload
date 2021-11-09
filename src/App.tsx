@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
+import {render} from 'react-dom'
 import BaseLayout from './layouts/Base'
 import './global.css'
 import AppRouter from './layouts/Router'

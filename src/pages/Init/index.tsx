@@ -43,6 +43,8 @@ const InitPage = (): ReactElement => {
     }
     if (response.needInit) {
       history.replace('/setup')
+    } else {
+      history.replace('/home')
     }
   }
   const check = () => {

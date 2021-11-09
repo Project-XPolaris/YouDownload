@@ -1,7 +1,7 @@
-import { createModel } from 'hox'
-import { getAllTasks } from '../api/task'
-import { useState } from 'react'
-import { TaskEntity } from '../api/entites/task'
+import {createModel} from 'hox'
+import {getAllTasks} from '../api/task'
+import {useState} from 'react'
+import {TaskEntity} from '../api/entites/task'
 
 export const reduceTask = (result: TaskEntity[], { statusFilter = 'All' }:{ statusFilter:string }) => {
   if (result === undefined) {
@@ -33,7 +33,7 @@ const TaskModel = () => {
     return reduceTask(tasks, { statusFilter })
   }
   return {
-    tasks, getTasks, setStatusFilter, refreshTask
+    tasks, getTasks, setStatusFilter, refreshTask,setTasks
   }
 }
 const useTaskModel = createModel(TaskModel)

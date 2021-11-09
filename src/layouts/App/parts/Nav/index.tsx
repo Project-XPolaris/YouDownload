@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { Divider, IconButton } from '@material-ui/core'
 import useStyles from './style'
 import { CheckCircle, GetApp, LinkOff, ListAlt, Pause, Power, Settings } from '@material-ui/icons'
@@ -7,6 +7,7 @@ import logo from '../../../../assets/icon.png'
 import { useHistory } from 'react-router-dom'
 import useTaskModel from '../../../../models/task'
 import { useInterval } from 'ahooks'
+import { DefaultWebsocketAPI } from '../../../../api/notification/instance'
 
 export interface AppNavigationPropsType {
 
@@ -22,9 +23,23 @@ const AppNavigation = ({ }: AppNavigationPropsType):ReactElement => {
   const taskModel = useTaskModel()
   const layoutModel = useLayoutModel()
   const history = useHistory()
-  useInterval(async () => {
+  useEffect(() => {
     taskModel.refreshTask()
-  }, 1000)
+    DefaultWebsocketAPI.connect()
+    DefaultWebsocketAPI.addHandler({
+      id: 'main',
+      onMessage: (event) => {
+        console.log('on message')
+        console.log(event)
+        if (event.event === 'TaskStatus') {
+          taskModel.setTasks(event.data)
+        }
+      }
+    })
+  }, [])
+
+
+
   const torrentNavs: NavItem[] = [
     {
       key: 'Engine',
